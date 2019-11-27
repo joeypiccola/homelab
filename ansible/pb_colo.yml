@@ -1,0 +1,10 @@
+---
+- hosts: colo
+  become: true
+  roles:
+    - role: base
+      tags:
+        - base
+    - role: colo
+      tags:
+        - colo

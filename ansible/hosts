@@ -1,0 +1,10 @@
+[colo]
+10.0.3.54 hostname=pi4-0
+
+[pizerosensor]
+10.0.3.107 hostname=pi0-a location=crawl_space
+10.0.3.112 hostname=pi0-b location=mech_room
+10.0.3.113 hostname=pi0-c location=outside
+
+[misc]
+10.0.3.105 hostname=pi3-0

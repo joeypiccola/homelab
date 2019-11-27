@@ -1,0 +1,22 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+    <block type="onfirstboot" id="onfirstboot" x="9" y="3">
+        <next>
+            <block type="changesshkeys" id="s5i:6M|wFd@eH?5F+`By">
+                <next>
+                    <block type="authorizekey" id="xqpUF(6bM~=y;1[FscG|">
+                        <field name="1">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDee0b7i9QgEsoahl2TLzlb+lg1xnfdquyg1tdkbro/V3EduQR1s3hLIkOsZqEXXXuuuIueJlcPI/W1KqOzMu+5Q6GRFzbYqUZ6/VHk59zHh4DOFNk2cmVIRvq02rpZCjEOdLAlgi2RlWP6YLtXMQkn3ogfOrKeDP7aptYwPINofuKYWAMoE9CFi3sbrQfNs0qBLICPfesV4b3kFoNu6Anmivz3gXMLAvQ9ViIGhcRgou2BNZx9ZxVGa66VJnP9WpDmGgjvMaPJVPecTlSYy3UwF6VGBGYlbiYGi+h1oztN358uXeF2GWxM+FtgHKK2cXnzUmuc53Ew0JOEc+psIxTj raspberrypis</field>
+                        <field name="2">pi</field>
+                        <next>
+                            <block type="seti2c" id="mK#sDJ{7t0v,-Qd4vV@w">
+                                <field name="1">Enable</field>
+                                <next>
+                                    <block type="reboot" id="8wdg5cS4qGqZXl,tg4-B"></block>
+                                </next>
+                            </block>
+                        </next>
+                    </block>
+                </next>
+            </block>
+        </next>
+    </block>
+</xml>

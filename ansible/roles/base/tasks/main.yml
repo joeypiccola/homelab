@@ -1,0 +1,15 @@
+---
+
+# ansible_os_family
+- name: Include Windows tasks
+  include_tasks: windows.yml
+  when: ansible_os_family == "Windows"
+
+- name: Include Debian tasks
+  include_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
+# ansible_lsb
+- name: Include Rasbian tasks
+  include_tasks: raspbian.yml
+  when: ansible_lsb.id == "Raspbian"

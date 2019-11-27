@@ -1,0 +1,10 @@
+---
+- hosts: pizerosensor
+  become: true
+  roles:
+    - role: base
+      tags:
+        - base
+    - role: pizerosensor
+      tags:
+        - pizerosensor
