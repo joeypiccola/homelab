@@ -1,1 +1,26 @@
 ---
+- name: Install OpenVPN package
+  apt:
+    pkg: openvpn
+    state: latest
+
+- name: Ensure OpenVPN autostart is set to all
+  lineinfile:
+    path: /etc/default/openvpn
+    regexp: '^#AUTOSTART="all"'
+    line: AUTOSTART="all"
+    backrefs: true
+
+- name: Enable OpenVPN service
+  become: true
+  systemd:
+    name: openvpn@client.service
+    enabled: true
+
+- name: Copy over OpenVPN config
+  become: true
+  template:
+    src: "{{ role_path }}/files/joey_colo.conf"
+    dest: /etc/openvpn/client.conf
+    owner: pi
+    mode: 0600
