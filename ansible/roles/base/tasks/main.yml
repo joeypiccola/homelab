@@ -17,4 +17,4 @@
 # telegraf_stats
 - name: Include telegraf tasks
   include_tasks: telegraf.yml
-  when: telegraf_stats and telegraf_stats is defined
+  when: telegraf_stats|bool and telegraf_stats is defined

@@ -31,11 +31,11 @@
     src: "{{ role_path }}/files/telegraf.conf"
     dest: "{{ telegraf_conf_path }}"
   register: telegrafconf
-  when: telegraf_stats
+  when: telegraf_stats|bool
 
 - name: Restart telegraf
   tags: telegraf
   service:
     name: telegraf
     state: restarted
-  when: telegrafconf.changed and telegraf_stats
+  when: telegrafconf.changed and telegraf_stats|bool
