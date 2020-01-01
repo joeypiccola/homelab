@@ -13,3 +13,8 @@
 - name: Include Rasbian tasks
   include_tasks: raspbian.yml
   when: ansible_lsb.id == "Raspbian"
+
+# telegraf_stats
+- name: Include telegraf tasks
+  include_tasks: telegraf.yml
+  when: telegraf_stats

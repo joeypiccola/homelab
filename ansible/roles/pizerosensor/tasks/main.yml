@@ -8,24 +8,6 @@
     state: present
     executable: pip3
 
-- name: Import InfluxData GPG signing key for InfluxData repository
-  tags: telegraf
-  apt_key:
-    url: https://repos.influxdata.com/influxdb.key
-    state: present
-
-- name: Add InfluxData repository for telegraf packages
-  tags: telegraf
-  apt_repository:
-    repo: deb https://repos.influxdata.com/debian stretch stable
-    state: present
-
-- name: Install telegraf packages
-  tags: telegraf
-  apt:
-    pkg: telegraf
-    state: latest
-
 - name: Copy over python script
   become: true
   tags: python
@@ -41,26 +23,11 @@
     src: "{{ role_path }}/files/telegraf.conf"
     dest: "{{ telegraf_conf_path }}"
   register: telegrafconf
-
-- name: Set telegraf user groups
-  tags: telegraf
-  user:
-    groups:
-    - video
-    - i2c
-    - telegraf
-    name: telegraf
+  when: telegraf_stats
 
 - name: Restart telegraf
   tags: telegraf
   service:
     name: telegraf
     state: restarted
-  when: telegrafconf.changed
-
-- name: Ensure Telegraf is running and set to start
-  tags: telegraf
-  service:
-    name: telegraf
-    state: started
-    enabled: yes
+  when: telegrafconf.changed or telegraf_stats

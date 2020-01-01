@@ -1,0 +1,35 @@
+---
+
+- name: Import InfluxData GPG signing key for InfluxData repository
+  tags: telegraf
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name: Add InfluxData repository for telegraf packages
+  tags: telegraf
+  apt_repository:
+    repo: deb https://repos.influxdata.com/debian stretch stable
+    state: present
+
+- name: Install telegraf packages
+  tags: telegraf
+  apt:
+    pkg: telegraf
+    state: latest
+
+- name: Set telegraf user groups
+  tags: telegraf
+  user:
+    groups:
+    - video
+    - i2c
+    - telegraf
+    name: telegraf
+
+- name: Ensure Telegraf is running and set to start
+  tags: telegraf
+  service:
+    name: telegraf
+    state: started
+    enabled: yes

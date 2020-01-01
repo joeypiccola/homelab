@@ -6,7 +6,3 @@
 - name: Set timezone to American/Denver
   timezone:
     name: "{{ timezone }}"
-
-# - name: Include samdoran.fish
-#   include_role:
-#      name: galaxy_roles/samdoran.fish
