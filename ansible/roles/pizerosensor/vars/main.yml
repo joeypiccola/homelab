@@ -1,5 +1,4 @@
 ---
-telegraf_stats: true
 python_script_path: /home/pi/Get-BME280Stats.py
 telegraf_temp_exec_interval: 10m
 telegraf_output_database_temp: temp_metrics

@@ -38,4 +38,4 @@
   service:
     name: telegraf
     state: restarted
-  when: telegrafconf.changed or telegraf_stats
+  when: telegrafconf.changed and telegraf_stats
