@@ -1,0 +1,17 @@
+{
+    "host": "esxi-4.piccola.us",
+    "vcenter_server": "vcenter.ad.piccola.us",
+    "datastore": "freenas_datastore_0",
+    "insecure_connection": "true",
+    "datacenter": "Basement",
+    "folder": "Templates/packer_uploads",
+    "cluster": "BC1",
+    "network": "VLAN3_primary_LAN",
+    "disk_controller_type": "pvscsi",
+    "network_card": "vmxnet3",
+    "CPU_hot_plug": "true",
+    "RAM_hot_plug": "true",
+    "disk_thin_provisioned": "true",
+    "convert_to_template": "true",
+    "vm_version": "13"
+}
