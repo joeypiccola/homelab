@@ -68,6 +68,16 @@
             ]
         },
         {
+            "type": "windows-update",
+            "update_limit": 50,
+            "filters": [
+                "exclude:$_.Title -like '*VMware*'",
+                "exclude:$_.Title -like '*Preview*'",
+                "exclude:$_.Title -like '*Defender*'",
+                "include:$true"
+            ]
+        },
+        {
             "type": "powershell",
             "scripts": [
                 "scripts/Remove-UpdateCache.ps1",
