@@ -42,7 +42,6 @@
         "folder": "{{ user `folder` }}",
         "floppy_files": [
             "{{ user `answerfile` }}",
-            "scripts/Set-WinRM.ps1",
             "scripts/winrm.bat",
             "drivers/",
             "scripts/Install-VMwareToolsVsphere.ps1"
