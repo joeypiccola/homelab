@@ -54,8 +54,7 @@
             "elevated_password": "vagrant",
             "scripts": [
                 "scripts/Disable-UAC.ps1",
-                "scripts/Install-Net35.ps1",
-                "scripts/Set-WinRM.ps1"
+                "scripts/Install-Net35.ps1"
             ]
         },
         {
@@ -68,6 +67,16 @@
             ]
         },
         {
+            "type": "windows-update",
+            "update_limit": 50,
+            "filters": [
+                "exclude:$_.Title -like '*VMware*'",
+                "exclude:$_.Title -like '*Preview*'",
+                "exclude:$_.Title -like '*Defender*'",
+                "include:$true"
+            ]
+        },
+        {
             "type": "powershell",
             "scripts": [
                 "scripts/Remove-UpdateCache.ps1",
@@ -77,5 +86,4 @@
             ]
         }
     ]
-
 }

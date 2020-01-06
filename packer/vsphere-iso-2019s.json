@@ -54,8 +54,7 @@
             "elevated_password": "vagrant",
             "scripts": [
                 "scripts/Disable-UAC.ps1",
-                "scripts/Install-Net35.ps1",
-                "scripts/Set-WinRM.ps1"
+                "scripts/Install-Net35.ps1"
             ]
         },
         {
