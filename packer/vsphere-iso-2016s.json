@@ -66,6 +66,12 @@
             ]
         },
         {
+            "type": "powershell",
+            "elevated_user": "vagrant",
+            "elevated_password": "vagrant",
+            "inline": ["Set-NetFirewallRule -Name WINRM-HTTP-In-TCP-PUBLIC -RemoteAddress"]
+        },
+        {
             "type": "windows-update",
             "update_limit": 50,
             "filters": [
