@@ -66,10 +66,13 @@
             ]
         },
         {
-            "type": "powershell",
-            "elevated_user": "vagrant",
-            "elevated_password": "vagrant",
-            "inline": ["Set-NetFirewallRule -Name WINRM-HTTP-In-TCP-PUBLIC -RemoteAddress"]
+            "type": "windows-update",
+            "filters": [
+                "include:$_.Title -like '*Servicing stack update*'"
+            ]
+        },
+        {
+            "type": "windows-restart"
         },
         {
             "type": "windows-update",
