@@ -24,7 +24,7 @@
         "CPUs": 4,
         "cpu_cores": 2,
         "CPU_hot_plug": "{{ user `CPU_hot_plug` }}",
-        "RAM": 4096,
+        "RAM": 6144,
         "RAM_hot_plug": "{{ user `RAM_hot_plug` }}",
         "network": "{{ user `network` }}",
         "disk_size": 30720,
