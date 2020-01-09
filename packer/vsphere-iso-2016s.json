@@ -67,15 +67,6 @@
         },
         {
             "type": "windows-update",
-            "filters": [
-                "include:$_.Title -like '*Servicing stack update*'"
-            ]
-        },
-        {
-            "type": "windows-restart"
-        },
-        {
-            "type": "windows-update",
             "update_limit": 50,
             "filters": [
                 "exclude:$_.Title -like '*VMware*'",
