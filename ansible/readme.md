@@ -4,13 +4,13 @@ All things ansible.
 
 ## requirements
 
-Install roles via the Galaxy.
+Install roles via the Galaxy, if any.
 
 `ansible-galaxy install -p ./galaxy_roles -r ./requirements.yml`
 
 ## .vault_pass
 
-Simple file containing your vault password (excluded from this repo). This file is referenced in `ansible.cfg` via `vault_password_file`.
+`.vault_pass` is a simple file containing your vault password (excluded from this repo). This file is referenced in `ansible.cfg` via `vault_password_file`.
 
 ## keys
 
