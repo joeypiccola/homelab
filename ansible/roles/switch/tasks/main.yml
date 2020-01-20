@@ -1,0 +1,43 @@
+---
+
+- name: configure host naming
+  ios_system:
+    hostname: "{{ hostvars[inventory_hostname].hostname }}"
+    domain_name: piccola.us
+
+- name: configure service
+  ios_config:
+    lines:
+      - no service pad
+      - service timestamps debug uptime
+      - service timestamps log uptime
+      - service password-encryption
+
+- name: configure time
+  ios_config:
+    lines:
+      - clock timezone MST -7 0
+      - ntp server 0.north-america.pool.ntp.org
+      - ntp server 1.north-america.pool.ntp.org
+      - ntp server 2.north-america.pool.ntp.org
+      - ntp server 3.north-america.pool.ntp.org
+
+- name: configure snmp-server
+  ios_config:
+    lines:
+      - snmp-server community public RO
+      - snmp-server location basement
+      - snmp-server contact joey
+
+- name: configure name servers
+  ios_system:
+    name_servers:
+      - 10.0.3.24
+
+- name: include switch specicic configuration
+  include_tasks: "{{ hostvars[inventory_hostname].hostname }}.yml"
+  when: hostname is defined
+
+- name: save running to startup when modified
+  ios_config:
+    save_when: modified

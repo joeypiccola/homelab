@@ -1,0 +1,5 @@
+---
+- hosts: switch
+  become: true
+  roles:
+    - role: switch

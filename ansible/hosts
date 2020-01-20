@@ -14,3 +14,6 @@ telegraf_stats=true
 
 [misc]
 10.0.3.105 hostname=pi3-0a
+
+[switch]
+10.0.2.5 hostname=cs-logan-0
