@@ -1,53 +1,51 @@
-#if (Test-Path -Path E:\) {
-#    e:\setup64 /s /v "/qb REBOOT=R" /l c:\windows\temp\vmware_tools_install.log
-#
+# move to mounted iso
+Set-Location E:
 
-
-#Set the current working directory to whichever drive corresponds to the mounted VMWare Tools installation ISO
-Set-Location e:
-
-#Install VMWare Tools
+# install tools
 Start-Process "setup64.exe" -ArgumentList '/s /v "/qb REBOOT=R"' -Wait
 
-#After the installation is finished, check to see if the 'VMTools' service enters the 'Running' state every 2 seconds for 10 seconds
-$Running = $false
-$iRepeat = 0
-while (!$Running -and $iRepeat -lt 5) {
-  Start-Sleep -s 2
-  $Service = Get-Service "VMTools" -ErrorAction SilentlyContinue
-  $Servicestatus = $Service.Status
-  if ($ServiceStatus -notlike "Running") {
-    $iRepeat++
+# check the service
+$i = 1
+while ((Get-Service -Name 'vmtools').Status -ne 'Running') {
+  Write-Host "VMware Tools service check. Set #1 loop #$i."
+  if ($i -gt 10) {
+    $neverStarted = $true
+    break
   }
-  else {
-    $Running = $true
-  }
+  Start-Sleep -Seconds 2
+  $i++
 }
 
-#If the service never enters the 'Running' state, re-install VMWare Tools
-if (!$Running) {
-  #Uninstall VMWare Tools
-  Start-Process "setup64.exe" -ArgumentList '/s /c' -Wait
-  #Install VMWare Tools
+# if tools never started the uninstall and reinstall
+if ($neverStarted) {
+  # get vmware tools guid
+  $uninstallKeys = Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
+  $toolskey = $uninstallKeys | Get-ItemProperty | Where-Object {$_.DisplayName -eq 'VMware Tools'}
+  # define msiexec args
+  $spArgs = @(
+    "/x"
+    "$($toolskey.PSChildName)"
+    "/qn"
+    "/norestart"
+  )
+  # uninstall tools
+  Start-Process msiexec.exe -ArgumentList $spArgs -Wait
+  # wait a bit
+  Start-Sleep -Seconds 10
+  # install tools
   Start-Process "setup64.exe" -ArgumentList '/s /v "/qb REBOOT=R"' -Wait
-  #Wait again for the VMTools service to start
-  $iRepeat = 0
-  while (!$Running -and $iRepeat -lt 5) {
-    Start-Sleep -s 2
-    $Service = Get-Service "VMTools" -ErrorAction SilentlyContinue
-    $ServiceStatus = $Service.Status
+} else  {
+  # if started exit
+  exit 0
+}
 
-    if ($ServiceStatus -notlike "Running") {
-      $iRepeat++
-    }
-    else {
-      $Running = $true
-    }
+# check the service
+$i = 1
+while ((Get-Service -Name 'vmtools').Status -ne 'Running') {
+  Write-Host "VMware Tools service check. Set #2 loop #$i."
+  if ($i -gt 10) {
+    Write-Error "vmtools failed to install."
   }
-
-  #If after the reinstall, the service is still not running, this is a failed deployment.
-  if (!$Running) {
-    Write-Host -ForegroundColor Red "VMWare Tools are still not installed correctly. This is a failed deployment."
-    Pause
-  }
+  Start-Sleep -Seconds 2
+  $i++
 }
