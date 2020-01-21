@@ -44,5 +44,3 @@ Build an image via the [`dockerfile`](https://github.com/joeypiccola/homelab/blo
 ### in linux or windows
 
 `packer build -force -var-file variables-global.json -var "username=joey" -var "password=*" ./vsphere-iso-2019s.json`
-
-` ``data``  `
