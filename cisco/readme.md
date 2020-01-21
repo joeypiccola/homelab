@@ -2,6 +2,18 @@
 
 All things cisco.
 
+## wipe
+
+Connect up your console cable and power on the switch, whilst holding down the “mode” button.
+
+```plaintext
+switch:
+switch: flash_init
+switch: del flash:config.text
+switch: del flash:vlan.dat
+switch: boot
+```
+
 ## bootstrapping
 
 To get a wiped switch online paste the following via the console. You'll need to fill in `ip address` and `hostname`. Currently tested with 2960G.
@@ -16,7 +28,7 @@ ip address 10.0.2.x 255.255.255.0
 exit
 ip name-server 10.0.3.24
 
-hostname cs-logan-0
+hostname x
 ip domain-name piccola.us
 
 ip ssh version 2
