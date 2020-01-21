@@ -4,7 +4,21 @@ All things packer.
 
 ## requirements
 
-Install packer 1.4.5.
+| platform | packer | packer-builder-vsphere | packer-provisioner-windows-update | vmware-tools    |
+|----------|--------|------------------------|-----------------------------------|-----------------|
+| docker   | 1.4.4  | 2.3                    | 0.8.0                             | 11.0.5-15389592 |
+| windows  |        |                        |                                   | 11.0.5-15389592 |
+
+### credentials
+
+A file named `variables-cred.json` with the following.
+
+```json
+{
+    "username": "-",
+    "password": "-"
+}
+```
 
 ### building locally
 
@@ -25,8 +39,10 @@ Build an image via the [`dockerfile`](https://github.com/joeypiccola/homelab/blo
 
 ### in docker wherever you have docker
 
-`docker run --rm -v ``pwd``:/data -it packer_custom build -force -var-file variables-global.json -var 'username=joey' -var 'password=*' vsphere-iso-2019s.json`
+``docker run -v `pwd`:/data -it packer_custom build -force -var-file variables-global.json -var-file variables-cred.json vsphere-iso-2016s.json``
 
 ### in linux or windows
 
-`packer build -force -var-file variables-global.json -var 'username=joey' -var 'password=*' ./vsphere-iso-2019s.json`
+`packer build -force -var-file variables-global.json -var "username=joey" -var "password=*" ./vsphere-iso-2019s.json`
+
+` ``data``  `
