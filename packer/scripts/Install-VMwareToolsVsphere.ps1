@@ -6,8 +6,8 @@ Start-Process "setup64.exe" -ArgumentList '/s /v "/qb REBOOT=R"' -Wait
 
 # check the service
 $i = 1
-while ((Get-Service -Name 'vmtools').Status -ne 'Running') {
-  Write-Host "VMware Tools service check. Set #1 loop #$i."
+while ((Get-Service -Name 'vmtools' -ErrorAction SilentlyContinue).Status -ne 'Running') {
+  Write-Host "VMware Tools service check. Loop #1 interval #$i."
   if ($i -gt 10) {
     $neverStarted = $true
     break
@@ -41,10 +41,11 @@ if ($neverStarted) {
 
 # check the service
 $i = 1
-while ((Get-Service -Name 'vmtools').Status -ne 'Running') {
-  Write-Host "VMware Tools service check. Set #2 loop #$i."
+while ((Get-Service -Name 'vmtools' -ErrorAction SilentlyContinue).Status -ne 'Running') {
+  Write-Host "VMware Tools service check. Loop #2 interval #$i."
   if ($i -gt 10) {
     Write-Error "vmtools failed to install."
+    break
   }
   Start-Sleep -Seconds 2
   $i++
