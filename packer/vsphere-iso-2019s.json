@@ -10,7 +10,7 @@
         "vm_name": "{{ user `name` }}",
         "iso_paths": [
             "[freenas_datastore_0] iso/en_windows_server_2019_x64_dvd_3c2cf1202.iso",
-            "[freenas_datastore_0] iso/VMware-tools-windows-10.3.5-10430147.iso"
+            "[freenas_datastore_0] iso/VMware-tools-windows-11.0.5-15389592.iso"
         ],
         "communicator": "winrm",
         "winrm_username": "vagrant",
@@ -64,6 +64,15 @@
             "scripts": [
                 "scripts/Install-Nuget.ps1"
             ]
+        },
+        {
+          "type": "windows-update",
+          "filters": [
+              "include:$_.Title -like '*Servicing Stack Update for Windows*'"
+          ]
+        },
+        {
+            "type": "windows-restart"
         },
         {
             "type": "windows-update",
