@@ -16,7 +16,7 @@ while ((Get-Service -Name 'vmtools' -ErrorAction SilentlyContinue).Status -ne 'R
   $i++
 }
 
-# if tools never started the uninstall and reinstall
+# if tools never started then uninstall and reinstall
 if ($neverStarted) {
   # get vmware tools guid
   $uninstallKeys = Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
