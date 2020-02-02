@@ -58,7 +58,7 @@ exit
 wr
 ```
 
-## upgrading !! WIP !!
+## upgrading
 
 Get the current booted version.
 
@@ -79,7 +79,7 @@ Directory of flash:/
 57931776 bytes total (32155648 bytes free)
 ```
 
-Delete unused images or files.
+Maybe delete unused images or files.
 
 ```plaintext
 Switch#delete flash:c2960s-universalk9-mz.122-55.SE11.bin
@@ -104,4 +104,41 @@ Address or name of remote host []? 10.0.3.102
 Source filename []? c2960s-universalk9-mz.152-2.E9.bin
 Destination filename [c2960s-universalk9-mz.152-2.E9.bin]?
 Accessing tftp://10.0.3.102/c2960s-universalk9-mz.152-2.E9.bin...
+```
+
+Verify image on client.
+
+```bash
+md5 c2960s-universalk9-mz.152-2.E9.bin
+MD5 (c2960s-universalk9-mz.152-2.E9.bin) = ea604d030b378b6c5c3dda3d501ac2f5
+```
+
+Verify image on switch.
+
+```plaintext
+switch#verify /md5 flash1:c2960s-universalk9-mz.152-2.E9.bin
+......Done!
+verify /md5 (flash:c2960s-universalk9-mz.152-2.E9.bin) = ea604d030b378b6c5c3dda3d501ac2f5
+```
+
+Set boot image
+
+```plaintext
+config t
+boot system switch all flash:c2960s-universalk9-mz.152-2.E9.bin
+exit
+```
+
+Get the booted version again.
+
+```plaintext
+Switch#sh boot | in BOOT
+BOOT path-list      : flash:c2960s-universalk9-mz.150-2.SE10a.bin
+```
+
+Write and reload.
+
+```plaintext
+wr
+reload
 ```
