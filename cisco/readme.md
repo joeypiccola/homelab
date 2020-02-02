@@ -14,7 +14,7 @@ switch: del flash:vlan.dat
 switch: boot
 ```
 
-## bootstrapping
+## bootstrap
 
 To get a wiped switch online paste the following via the console. You'll need to fill in `ip address`. Currently tested with 2960G & 2960S.
 
@@ -58,7 +58,7 @@ exit
 wr
 ```
 
-## upgrading
+## upgrade
 
 Get the current booted version.
 
@@ -99,7 +99,6 @@ Copy image.
 
 ```plaintext
 switch#copy tftp flash
-*Jan  2 00:19:19.960: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to up
 Address or name of remote host []? 10.0.3.102
 Source filename []? c2960s-universalk9-mz.152-2.E9.bin
 Destination filename [c2960s-universalk9-mz.152-2.E9.bin]?
