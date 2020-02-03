@@ -1,0 +1,69 @@
+---
+
+vlans:
+  - name: default
+    vlan_id: 1
+    network_id: 10.0.2.0
+    network_mask: 24
+    l3_ip: 10.0.2.1
+    l3_interface: eth1
+  - name: lan
+    vlan_id: 3
+    network_id: 10.0.3.0
+    network_mask: 24
+    l3_ip: 10.0.3.1
+    l3_interface: eth1
+  - name: vm_test_vlan5
+    vlan_id: 5
+    network_id: 10.0.5.0
+    network_mask: 24
+    l3_ip: 10.0.5.1
+    l3_interface: eth1
+  - name: vm_test_vlan6
+    vlan_id: 6
+    network_id: 10.0.6.0
+    network_mask: 24
+    l3_ip: 10.0.6.1
+    l3_interface: eth1
+  - name: vm_test_vlan7
+    vlan_id: 7
+    network_id: 10.0.7.0
+    network_mask: 24
+    l3_ip: 10.0.7.1
+    l3_interface: eth1
+  - name: guests
+    vlan_id: 8
+    network_id: 192.168.8.0
+    network_mask: 24
+    l3_ip: 192.168.8.1
+    l3_interface: eth1
+  - name: iot_devices
+    vlan_id: 9
+    network_id: 192.168.9.0
+    network_mask: 24
+    l3_ip: 192.168.9.1
+    l3_interface: eth1
+  - name: ip_cameras
+    vlan_id: 10
+    network_id: 10.0.10.0
+    network_mask: 24
+    l3_ip: 10.0.10.1
+    l3_interface: eth1
+  - name: taylor_colo
+    vlan_id: 20
+    network_id: 192.168.20.0
+    network_mask: 24
+    l3_ip: 192.168.20.1
+    l3_interface: eth1
+  - name: iscsi_a
+    vlan_id: 202
+    l2_only: true
+  - name: iscsi_b
+    vlan_id: 203
+    l2_only: true
+  - name: vmotion_a
+    vlan_id: 204
+    l2_only: true
+  - name: cl_pppoe
+    vlan_id: 201
+    l3_interface: eth0
