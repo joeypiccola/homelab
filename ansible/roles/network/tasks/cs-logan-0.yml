@@ -1,0 +1,37 @@
+---
+
+- name: configure vtp
+  ios_config:
+    lines:
+      - vtp mode server
+      - "vtp domain {{ vtp_domain }}"
+      - "vtp password {{ vtp_password }}"
+      - vtp pruning
+      - "vtp version {{ vtp_version }}"
+
+- name: configure vlans
+  ios_vlans:
+    config:
+      - name: "{{ item.name }}"
+        vlan_id: "{{ item.vlan_id }}"
+        state: active
+        shutdown: disabled
+    state: merged
+  loop: "{{ vlans }}"
+
+- name: configure general interfaces
+  ios_config:
+    parents: "interface {{ item.interface }}"
+    lines:
+      - "description {{ item.description }}"
+      - "switchport mode {{ item.mode }}"
+      - "switchport access vlan {{ item.vlan }}"
+  with_items:
+    - {interface: GigabitEthernet1/0/47, description: laptop, mode: access, vlan: 3}
+
+- name: configure cs-logan-0 <-> ss-logan-0
+  ios_config:
+    parents: interface GigabitEthernet1/0/1
+    lines:
+      - description cs-logan-0 <-> ss-logan-0
+      - switchport mode trunk

@@ -3,27 +3,11 @@
 - name: configure vtp
   ios_config:
     lines:
-      - vtp domain piccola
-      - "vtp password {{ vtp_server_password }}"
-      - vtp mode server
+      - vtp mode client
+      - "vtp domain {{ vtp_domain }}"
+      - "vtp password {{ vtp_password }}"
       - vtp pruning
-      - vtp version 1
-
-- name: configure vlans
-  ios_vlans:
-    config:
-      - name: "{{ item.name }}"
-        vlan_id: "{{ item.vlan_id }}"
-        state: "{{ item.state }}"
-        shutdown: "{{ item.shutdown }}"
-    state: merged
-  with_items:
-     - { name: default, vlan_id: 1, state: active, shutdown: disabled }
-     - { name: lan, vlan_id: 3, state: active, shutdown: disabled }
-     - { name: guests, vlan_id: 8, state: active, shutdown: disabled }
-     - { name: iot_devices, vlan_id: 9, state: active, shutdown: disabled }
-     - { name: ip_cameras, vlan_id: 10, state: active, shutdown: disabled }
-     - { name: cl_ppoe, vlan_id: 201, state: active, shutdown: disabled }
+      - "vtp version {{ vtp_version }}"
 
 - name: configure general interfaces
   ios_config:

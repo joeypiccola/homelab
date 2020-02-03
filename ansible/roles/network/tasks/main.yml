@@ -5,7 +5,7 @@
     hostname: "{{ hostvars[inventory_hostname].hostname }}"
     domain_name: piccola.us
 
-- name: configure service
+- name: service config
   ios_config:
     lines:
       - no service pad
@@ -13,14 +13,21 @@
       - service timestamps log uptime
       - service password-encryption
 
-- name: configure time
+- name: configure jumbo frames
+  ios_config:
+    lines:
+      - system mtu jumbo 9000
+
+- name: configure timezone
   ios_config:
     lines:
       - clock timezone MST -7 0
-      - ntp server 0.north-america.pool.ntp.org
-      - ntp server 1.north-america.pool.ntp.org
-      - ntp server 2.north-america.pool.ntp.org
-      - ntp server 3.north-america.pool.ntp.org
+
+- name: config ntp
+  ios_ntp:
+    server: "{{ item }}"
+    state: present
+  loop: "{{ ntp_servers }}"
 
 - name: configure snmp-server
   ios_config:
@@ -33,6 +40,10 @@
   ios_system:
     name_servers:
       - 10.0.3.24
+
+- name: Include vlans varible file
+  include_vars:
+    file: vlans.yml
 
 - name: include switch specicic configuration
   include_tasks: "{{ hostvars[inventory_hostname].hostname }}.yml"
