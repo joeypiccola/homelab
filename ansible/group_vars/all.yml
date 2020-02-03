@@ -6,3 +6,8 @@ telegraf_output_urls: http://influxdb.piccola.us:8086
 telegraf_output_database_lin: lin_metrics
 telegraf_conf_path: /etc/telegraf/telegraf.conf
 telegraf_agent_interval: 30s
+ntp_servers:
+  - 0.north-america.pool.ntp.org
+  - 1.north-america.pool.ntp.org
+  - 2.north-america.pool.ntp.org
+  - 3.north-america.pool.ntp.org
