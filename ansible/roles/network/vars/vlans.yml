@@ -61,7 +61,7 @@ vlans:
   - name: iscsi_b
     vlan_id: 203
     l2_only: true
-  - name: vmotion_a
+  - name: vmotion
     vlan_id: 204
     l2_only: true
   - name: cl_pppoe

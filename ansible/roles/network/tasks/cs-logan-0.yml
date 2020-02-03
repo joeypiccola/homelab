@@ -27,7 +27,7 @@
       - "switchport mode {{ item.mode }}"
       - "switchport access vlan {{ item.vlan }}"
   with_items:
-    - {interface: GigabitEthernet1/0/47, description: laptop, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/47, mode: access, vlan: 3, description: laptop}
 
 - name: configure cs-logan-0 <-> ss-logan-0
   ios_config:
