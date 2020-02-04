@@ -3,6 +3,9 @@
 vlans:
   - name: default
     vlan_id: 1
+    l2_only: true
+  - name: net-mgmt
+    vlan_id: 2
     network_id: 10.0.2.0
     network_mask: 24
     l3_ip: 10.0.2.1

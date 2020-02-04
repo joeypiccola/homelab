@@ -31,7 +31,8 @@
     lines:
       - description unfi-ap-pro
       - switchport mode trunk
-      - switchport trunk allowed vlan 1,3,8-10
+      - switchport trunk native vlan 2
+      - switchport trunk allowed vlan 1-3,8-10
 
 - name: configure century_link_ont interface
   ios_config:
@@ -45,5 +46,6 @@
   ios_config:
     parents: interface GigabitEthernet0/24
     lines:
-      - description cs-logan-0 <-> sg300-a
+      - description ss-logan-0 <-> cs-logan-0
       - switchport mode trunk
+      - switchport trunk native vlan 2
