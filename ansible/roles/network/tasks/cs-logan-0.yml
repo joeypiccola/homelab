@@ -30,7 +30,6 @@
     - {interface: GigabitEthernet1/0/13, mode: trunk, description: esxi3-pci2-guestNets}
     - {interface: GigabitEthernet1/0/20, mode: trunk, description: esxi4-pci1-guestNets}
     - {interface: GigabitEthernet1/0/21, mode: trunk, description: esxi4-pci2-guestNets}
-    - {interface: GigabitEthernet1/0/48, mode: trunk, description: cs-logan-0<->sg300-a}
 
 - name: configure general access interfaces
   ios_config:
@@ -59,8 +58,7 @@
     - {interface: GigabitEthernet1/0/19, mode: access, vlan: 202, description: esxi4-ob4-iscsi-a}
     - {interface: GigabitEthernet1/0/22, mode: access, vlan: 204, description: esxi4-pci3-vMotion}
     - {interface: GigabitEthernet1/0/23, mode: access, vlan: 204, description: esxi4-pci4-vMotion}
-    - {interface: GigabitEthernet1/0/24, mode: access, vlan: 204, description: esxi4-pci4-vMotion}
-    - {interface: GigabitEthernet1/0/26, mode: access, vlan: 3  , description: dc04}
+    - {interface: GigabitEthernet1/0/24, mode: access, vlan: 3  , description: dc04}
 
 - name: configure cs-logan-0 <-> edgerouter-eth0
   ios_config:
@@ -72,14 +70,14 @@
 
 - name: configure cs-logan-0 <-> edgerouter-eth1
   ios_config:
-    parents: interface GigabitEthernet1/0/27
+    parents: interface GigabitEthernet1/0/26
     lines:
       - description cs-logan-0<->edgerouter-eth1
       - switchport mode trunk
 
 - name: configure cs-logan-0 <-> ss-logan-0
   ios_config:
-    parents: interface GigabitEthernet1/0/47
+    parents: interface GigabitEthernet1/0/27
     lines:
       - description cs-logan-0<->ss-logan-0
       - switchport trunk native vlan 2
