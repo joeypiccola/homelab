@@ -1,9 +1,6 @@
 ---
 
 vlans:
-  - name: default
-    vlan_id: 1
-    l2_only: true
   - name: net-mgmt
     vlan_id: 2
     network_id: 10.0.2.0
@@ -60,13 +57,12 @@ vlans:
     l3_interface: eth1
   - name: iscsi_a
     vlan_id: 202
-    l2_only: true
   - name: iscsi_b
     vlan_id: 203
-    l2_only: true
+  - name: iscsi_c
+    vlan_id: 205
   - name: vmotion
     vlan_id: 204
-    l2_only: true
   - name: cl_pppoe
     vlan_id: 201
     l3_interface: eth0

@@ -1,54 +1,13 @@
 ---
 
-- name: configure host naming
-  ios_system:
-    hostname: "{{ hostvars[inventory_hostname].hostname }}"
-    domain_name: piccola.us
-
-- name: service config
-  ios_config:
-    lines:
-      - no service pad
-      - service timestamps debug uptime
-      - service timestamps log uptime
-      - service password-encryption
-
-- name: configure jumbo frames
-  ios_config:
-    lines:
-      - system mtu jumbo 9000
-
-- name: configure timezone
-  ios_config:
-    lines:
-      - clock timezone MST -7 0
-
-- name: config ntp
-  ios_ntp:
-    server: "{{ item }}"
-    state: present
-  loop: "{{ ntp_servers }}"
-
-- name: configure snmp-server
-  ios_config:
-    lines:
-      - snmp-server community public RO
-      - snmp-server location basement
-      - snmp-server contact joey
-
-- name: configure name servers
-  ios_system:
-    name_servers:
-      - 10.0.3.24
-
 - name: Include vlans varible file
   include_vars:
     file: vlans.yml
 
-- name: include switch specicic configuration
-  include_tasks: "{{ hostvars[inventory_hostname].hostname }}.yml"
-  when: hostname is defined
+- name: include router \ edgeos tasks
+  include_tasks: routers.yml
+  when: network_layer == 3
 
-- name: save running to startup when modified
-  ios_config:
-    save_when: modified
+- name: include switch \ ios tasks
+  include_tasks: switches.yml
+  when: network_layer == 2

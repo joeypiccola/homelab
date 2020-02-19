@@ -1,5 +1,7 @@
 ---
-- hosts: switch
+- hosts:
+    - routers
+    - switches
   become: true
   roles:
     - role: network

@@ -59,6 +59,9 @@
     - {interface: GigabitEthernet1/0/22, mode: access, vlan: 204, description: esxi4-pci3-vMotion}
     - {interface: GigabitEthernet1/0/23, mode: access, vlan: 204, description: esxi4-pci4-vMotion}
     - {interface: GigabitEthernet1/0/24, mode: access, vlan: 3  , description: dc04}
+    - {interface: GigabitEthernet1/0/28, mode: access, vlan: 205, description: esxi3-ob2-iscsi-c}
+    - {interface: GigabitEthernet1/0/29, mode: access, vlan: 205, description: esxi4-ob2-iscsi-c}
+    - {interface: GigabitEthernet1/0/30, mode: access, vlan: 205, description: freenas-igb2-iSCSI-c}
 
 - name: configure cs-logan-0 <-> edgerouter-eth0
   ios_config:
@@ -68,12 +71,13 @@
       - switchport mode trunk
       - switchport trunk allowed vlan 201
 
-- name: configure cs-logan-0 <-> edgerouter-eth1
+- name: configure cs-logan-0<->edgerouter-eth1
   ios_config:
     parents: interface GigabitEthernet1/0/26
     lines:
       - description cs-logan-0<->edgerouter-eth1
       - switchport mode trunk
+      - switchport trunk allowed vlan except 202-205
 
 - name: configure cs-logan-0 <-> ss-logan-0
   ios_config:

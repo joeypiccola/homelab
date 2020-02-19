@@ -42,7 +42,7 @@
       - switchport mode trunk
       - switchport trunk allowed vlan 201
 
-- name: configure cs-logan-0 <-> sg300-a interface
+- name: configure ss-logan-0 <-> cs-logan-0 interface
   ios_config:
     parents: interface GigabitEthernet0/24
     lines:
