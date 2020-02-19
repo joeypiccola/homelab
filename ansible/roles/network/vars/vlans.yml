@@ -7,12 +7,14 @@ vlans:
     network_mask: 24
     l3_ip: 10.0.2.1
     l3_interface: eth1
+    dhcp: true
   - name: lan
     vlan_id: 3
     network_id: 10.0.3.0
     network_mask: 24
     l3_ip: 10.0.3.1
     l3_interface: eth1
+    dhcp: true
   - name: vm_test_vlan5
     vlan_id: 5
     network_id: 10.0.5.0
@@ -37,18 +39,21 @@ vlans:
     network_mask: 24
     l3_ip: 192.168.8.1
     l3_interface: eth1
+    dhcp: true
   - name: iot_devices
     vlan_id: 9
     network_id: 192.168.9.0
     network_mask: 24
     l3_ip: 192.168.9.1
     l3_interface: eth1
+    dhcp: true
   - name: ip_cameras
     vlan_id: 10
     network_id: 10.0.10.0
     network_mask: 24
     l3_ip: 10.0.10.1
     l3_interface: eth1
+    dhcp: true
   - name: taylor_colo
     vlan_id: 20
     network_id: 192.168.20.0
