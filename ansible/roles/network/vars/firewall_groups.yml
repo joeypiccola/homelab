@@ -1,0 +1,35 @@
+---
+
+firewall_groups:
+  - name: GitHub_WebHooks
+    type: network
+    description: github servers that send webhooks
+    items:
+      - 140.82.112.0/20
+      - 185.199.108.0/22
+      - 92.30.252.0/22
+  - name: UniFi_Video_Ports
+    type: port
+    description: UniFi Video Ports
+    items:
+      - 22
+      - 6666
+      - 7004
+      - 7080
+      - 7442
+      - 7443
+  - name: UniFi_Video_Servers
+    type: address
+    description: UniFi Video Ports
+    items:
+      - 10.0.3.58
+  - name: IP_Cameras
+    type: network
+    description: ip camera networks
+    items:
+      - 10.0.10.0/24
+  - name: RFC1918-ten
+    type: network
+    description: RFC1918-ten
+    items:
+      - 10.0.0.0/8
