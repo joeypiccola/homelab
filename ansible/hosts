@@ -16,8 +16,8 @@ telegraf_stats=true
 10.0.3.105 hostname=pi3-0a
 
 [routers]
-10.0.3.1 hostname=cr-logan-0
+10.0.2.1 hostname=cr-logan-0
 
 [switches]
-#10.0.2.5  hostname=ss-logan-0
-#10.0.2.33 hostname=cs-logan-0
+10.0.2.5  hostname=ss-logan-0
+10.0.2.33 hostname=cs-logan-0
