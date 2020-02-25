@@ -66,6 +66,13 @@
       - set service dhcp-relay server {{ item }}
   loop: "{{ dhcp_servers }}"
 
+- name: set hardware offloading options
+  edgeos_config:
+    lines:
+      - set system offload ipv4 forwarding enable
+      - set system offload ipv4 pppoe enable
+      - set system offload ipv4 vlan enable
+
 - name: set dhcp-relay interfaces
   edgeos_config:
     lines: set service dhcp-relay interface {{ item.l3_interface }}.{{ item.vlan_id }}
