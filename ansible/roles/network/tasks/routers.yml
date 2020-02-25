@@ -1,0 +1,30 @@
+---
+
+- name: Manage ansible user
+  edgeos_config:
+    lines:
+      - set system login user ansible authentication plaintext-password {{ ansible_password }}
+      - set system login user ansible level admin
+
+- name: Set hostname
+  edgeos_config:
+    lines:
+      - set system host-name {{ hostvars[inventory_hostname].hostname }}
+
+- name: Config ntp
+  edgeos_config:
+    lines: set system ntp server {{ item }}
+  loop: "{{ ntp_servers }}"
+
+- name: Set timezone
+  edgeos_config:
+    lines:
+      - set system time-zone {{ timezone }}
+
+- name: include router specicic configuration
+  include_tasks: "{{ hostvars[inventory_hostname].hostname }}.yml"
+  when: hostname is defined
+
+- name: Save config
+  edgeos_config:
+    save: true

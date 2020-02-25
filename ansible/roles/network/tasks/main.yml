@@ -1,13 +1,13 @@
 ---
 
-- name: Include vlans varible file
+- name: Include vlans vars file
   include_vars:
     file: vlans.yml
 
-- name: include router \ edgeos tasks
+- name: include router / edgeos tasks
   include_tasks: routers.yml
   when: network_layer == 3
 
-- name: include switch \ ios tasks
+- name: include switch / ios tasks
   include_tasks: switches.yml
   when: network_layer == 2
