@@ -42,9 +42,9 @@
         "folder": "{{ user `folder` }}",
         "floppy_files": [
             "{{ user `answerfile` }}",
-            "scripts/winrm.bat",
+            "scripts/win/winrm.bat",
             "drivers/",
-            "scripts/Install-VMwareToolsVsphere.ps1"
+            "scripts/win/Install-VMwareToolsVsphere.ps1"
         ]
     }],
     "provisioners": [{
@@ -52,8 +52,8 @@
             "elevated_user": "vagrant",
             "elevated_password": "vagrant",
             "scripts": [
-                "scripts/Disable-UAC.ps1",
-                "scripts/Install-Net35.ps1"
+                "scripts/win/Disable-UAC.ps1",
+                "scripts/win/Install-Net35.ps1"
             ]
         },
         {
@@ -62,7 +62,7 @@
         {
             "type": "powershell",
             "scripts": [
-                "scripts/Install-Nuget.ps1"
+                "scripts/win/Install-Nuget.ps1"
             ]
         },
         {
@@ -87,10 +87,10 @@
         {
             "type": "powershell",
             "scripts": [
-                "scripts/Remove-UpdateCache.ps1",
-                "scripts/Remove-PackerScheduledTasks.ps1",
-                "scripts/Invoke-Defrag.ps1",
-                "scripts/Reset-EmptySpace.ps1"
+                "scripts/win/Remove-UpdateCache.ps1",
+                "scripts/win/Remove-PackerScheduledTasks.ps1",
+                "scripts/win/Invoke-Defrag.ps1",
+                "scripts/win/Reset-EmptySpace.ps1"
             ]
         }
     ]
