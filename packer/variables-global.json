@@ -1,5 +1,5 @@
 {
-    "host": "esxi-4.piccola.us",
+    "host": "esxi-3.piccola.us",
     "vcenter_server": "vcenter.ad.piccola.us",
     "datastore": "freenas_datastore_0",
     "insecure_connection": "true",
