@@ -2,3 +2,4 @@ packer-builder-vsphere-iso
 packer-builder-vsphere-iso.exe
 packer-provisioner-windows-update.exe
 variables-cred.json
+scripts/old/*
