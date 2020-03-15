@@ -70,8 +70,9 @@
   edgeos_config:
     lines:
       - set system offload ipv4 forwarding enable
-      - set system offload ipv4 pppoe enable
-      - set system offload ipv4 vlan enable
+      - set system offload ipv4 pppoe disable
+      - set system offload ipv4 vlan disable
+      - set system offload ipv4 gre disable
 
 - name: set dhcp-relay interfaces
   edgeos_config:
