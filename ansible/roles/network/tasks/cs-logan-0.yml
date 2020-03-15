@@ -8,6 +8,7 @@
       - "vtp password {{ vtp_password }}"
       - vtp pruning
       - "vtp version {{ vtp_version }}"
+  changed_when: false
 
 - name: configure vlans
   ios_vlans:
@@ -62,6 +63,7 @@
     - {interface: GigabitEthernet1/0/28, mode: access, vlan: 205, description: esxi3-ob2-iscsi-c}
     - {interface: GigabitEthernet1/0/29, mode: access, vlan: 205, description: esxi4-ob2-iscsi-c}
     - {interface: GigabitEthernet1/0/30, mode: access, vlan: 205, description: freenas-igb2-iSCSI-c}
+    - {interface: GigabitEthernet1/0/31, mode: access, vlan: 20 , description: taylor-colo-raspi4}
 
 - name: configure cs-logan-0 <-> edgerouter-eth0
   ios_config:
