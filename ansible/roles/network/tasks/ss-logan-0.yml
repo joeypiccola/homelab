@@ -8,6 +8,7 @@
       - "vtp password {{ vtp_password }}"
       - vtp pruning
       - "vtp version {{ vtp_version }}"
+  changed_when: false
 
 - name: configure general interfaces
   ios_config:

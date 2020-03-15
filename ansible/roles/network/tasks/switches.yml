@@ -17,17 +17,20 @@
   ios_config:
     lines:
       - system mtu jumbo 9000
+  changed_when: false
 
 - name: configure timezone
   ios_config:
     lines:
       - clock timezone MST -7 0
+  changed_when: false
 
 - name: config ntp
   ios_ntp:
     server: "{{ item }}"
     state: present
   loop: "{{ ntp_servers }}"
+  changed_when: false
 
 - name: configure snmp-server
   ios_config:
@@ -52,3 +55,4 @@
 - name: save running to startup when modified
   ios_config:
     save_when: modified
+  changed_when: false

@@ -5,6 +5,7 @@
     lines:
       - set system login user ansible authentication plaintext-password {{ ansible_password }}
       - set system login user ansible level admin
+  changed_when: false
 
 - name: Set hostname
   edgeos_config:
@@ -28,3 +29,4 @@
 - name: Save config
   edgeos_config:
     save: true
+  changed_when: false
