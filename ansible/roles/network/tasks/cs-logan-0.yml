@@ -73,7 +73,7 @@
       - switchport mode trunk
       - switchport trunk allowed vlan 201
 
-- name: configure cs-logan-0<->edgerouter-eth1
+- name: configure cs-logan-0 <-> edgerouter-eth1
   ios_config:
     parents: interface GigabitEthernet1/0/26
     lines:
