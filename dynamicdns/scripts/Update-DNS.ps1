@@ -15,7 +15,8 @@ if ($configData.lastIP -ne $currentIP) {
     # try and update dns
     try {
         if ($host.version.major -lt 6) {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12}
-        Invoke-RestMethod -Uri $configData.freednsUri
+        # this is using FreeDNS's automatic IP detection
+        $result = Invoke-RestMethod -Uri $configData.freednsUri
     } catch {
         Write-Error $_.Exception.Message
     }
@@ -27,9 +28,8 @@ if ($configData.lastIP -ne $currentIP) {
             Body = @{
                 token   = $configData.pushoverToken
                 user    = $configData.pushoverUser
-                message = "Home IP Changed.`nCurrent: $currentIP`nPrevious: $($configData.lastIP)"
+                message = "Home IP Changed.`nCurrent: $currentIP`nPrevious: $($configData.lastIP)`n`nFreeDNS: $result"
             }
-
         }
         Invoke-RestMethod @irmPushoverSplat
     } catch {
