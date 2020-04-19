@@ -27,7 +27,7 @@ The following `configData.json` will need to be updated with secrets.
 
 ## run it in docker
 
-Credit to [xordiv](https://github.com/xordiv) for [docker-alpine-cron](https://github.com/xordiv/docker-alpine-cron) (e.g. `docker-cmd.sh` and `docker-entry.sh`)
+Credit to [xordiv](https://github.com/xordiv) for [docker-alpine-cron](https://github.com/xordiv/docker-alpine-cron) (e.g. `docker-cmd.sh` and `docker-entry.sh`).
 
 1. build the image
 
@@ -35,4 +35,4 @@ Credit to [xordiv](https://github.com/xordiv) for [docker-alpine-cron](https://g
 
 2. use `docker-compose` to start it
 
-`docker-compose up`
+`docker-compose up -d`
