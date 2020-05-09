@@ -1,0 +1,30 @@
+---
+
+- name: configure vtp
+  ios_config:
+    lines:
+      - vtp mode client
+      - "vtp domain {{ vtp_domain }}"
+      - "vtp password {{ vtp_password }}"
+      - vtp pruning
+      - "vtp version {{ vtp_version }}"
+  changed_when: false
+
+- name: configure general interfaces
+  ios_config:
+    parents: "interface {{ item.interface }}"
+    lines:
+      - "description {{ item.description }}"
+      - "switchport mode {{ item.mode }}"
+      - "switchport access vlan {{ item.vlan }}"
+  with_items:
+    - {interface: GigabitEthernet0/1, description: alley_camera, mode: access, vlan: 10}
+    - {interface: GigabitEthernet0/2, description: bench, mode: access, vlan: 3}
+
+- name: configure ts-logan-0 <-> ss-logan-0 interface
+  ios_config:
+    parents: interface GigabitEthernet0/8
+    lines:
+      - description ts-logan-0 <-> ss-logan-0
+      - switchport mode trunk
+      - switchport trunk native vlan 2

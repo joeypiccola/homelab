@@ -50,3 +50,11 @@
       - description ss-logan-0 <-> cs-logan-0
       - switchport mode trunk
       - switchport trunk native vlan 2
+
+- name: configure ss-logan-0 <-> ts-logan-0 interface
+  ios_config:
+    parents: interface GigabitEthernet0/10
+    lines:
+      - description ss-logan-0 <-> ts-logan-0
+      - switchport mode trunk
+      - switchport trunk native vlan 2
