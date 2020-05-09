@@ -2,6 +2,28 @@
 
 All things cisco.
 
+## notes
+
+- On first pass of a new switch it might take a bit for VTP to pull in the VLANs resulting in access port configs to fail.
+
+## usb serial
+
+Find and download `MacOSX_1.6.1_20160309.pkg` for your TrendNet `TU-S9`. Do not have the usb2serial connected when installed!
+
+`/Volumes/s$/applications/mac/usb2serial/Mac_TU-S9(10.9-10.12)/MacOSX_1.6.1_20160309.pkg`
+
+Find the usb device.
+
+`ls -la /dev/tty.us*`
+
+Connect to the usb device with screen.
+
+`screen /dev/tty.usbserial`
+
+Maybe on a different port (e.g. Ubiquity).
+
+`screen /dev/tty.usbserial 115200`
+
 ## wipe
 
 Connect up your console cable and power on the switch while holding down the “mode” button.
@@ -16,7 +38,7 @@ switch: boot
 
 ## bootstrap
 
-To get a wiped switch online paste the following via the console. You'll need to fill in `ip address`. Currently tested with 2960G & 2960S.
+To get a wiped switch online paste the following via the console. You'll need to fill in `ip address` and `enable secrets \ password`. Currently tested with 2960G & 2960S.
 
 ```plaintext
 enable
@@ -56,6 +78,33 @@ username cisco privilege 15 password ******
 service password-encryption
 exit
 wr
+```
+
+## vlan 2 / managment / uplink trunk
+
+Once up and running move to `VLAN2` as management VLAN. Commands may vary, not tested.
+
+```plaintext
+config t
+int vlan 1
+no ip address
+exit
+int vlan 2
+ip address x.x.x.x 255.255.255.0
+exit
+vlan 2
+name mgmt
+exit
+wr
+```
+
+Then setup trunk port (maybe upgade first)
+
+```plaintext
+interface GigabitEthernet0/24
+ description xx-logan-0 <-> xx-logan-0
+ switchport trunk native vlan 2
+ switchport mode trunk
 ```
 
 ## upgrade
@@ -121,6 +170,8 @@ verify /md5 (flash:c2960s-universalk9-mz.152-2.E9.bin) = ea604d030b378b6c5c3dda3
 ```
 
 Set boot image
+
+Note: `switch all` is specific to stacked switches.
 
 ```plaintext
 config t
