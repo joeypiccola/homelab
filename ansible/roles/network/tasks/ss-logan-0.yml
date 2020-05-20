@@ -26,11 +26,11 @@
     - {interface: GigabitEthernet0/6, description: office-a, mode: access, vlan: 3}
     - {interface: GigabitEthernet0/7, description: office-b, mode: access, vlan: 3}
 
-- name: configure unfi-ap-pro interface
+- name: configure unifi-ap-pro interface
   ios_config:
     parents: interface GigabitEthernet0/8
     lines:
-      - description unfi-ap-pro
+      - description unifi-ap-pro
       - switchport mode trunk
       - switchport trunk native vlan 2
       - switchport trunk allowed vlan 1-3,8-10
