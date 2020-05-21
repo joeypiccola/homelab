@@ -31,7 +31,7 @@
 
 - name: configure unifi-ap-lite interface
   ios_config:
-    parents: interface GigabitEthernet0/8
+    parents: interface GigabitEthernet0/3
     lines:
       - description unifi-ap-lite
       - switchport mode trunk
