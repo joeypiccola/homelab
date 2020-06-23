@@ -73,7 +73,7 @@
       - set system offload ipv4 pppoe enable
       - set system offload ipv4 vlan enable
       - set system offload ipv4 gre disable
-      - set system offload  ipv4 table-size 32768
+      - set system offload ipv4 table-size 32768
 
 - name: set dhcp-relay interfaces
   edgeos_config:
