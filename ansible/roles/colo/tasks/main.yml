@@ -1,41 +1,18 @@
 ---
-- name: Install OpenVPN package
+
+- name: Install parted
   apt:
-    pkg: openvpn
+    pkg: parted
     state: latest
 
-# - name: Ensure OpenVPN autostart is set to all
-#   lineinfile:
-#     path: /etc/default/openvpn
-#     regexp: '^#AUTOSTART="all"'
-#     line: AUTOSTART="all"
-#     backrefs: true
+- name: Include openVPN tasks
+  include_tasks: openvpn.yml
 
-- name: Enable OpenVPN service
-  become: true
-  systemd:
-    name: openvpn@client.service
-    enabled: true
+- name: Include telegraf tasks
+  include_tasks: telegraf.yml
 
-- name: Copy over OpenVPN config
-  become: true
-  template:
-    src: "{{ role_path }}/files/joey_colo.conf"
-    dest: /etc/openvpn/client.conf
-    owner: pi
-    mode: 0600
+- name: Include account tasks
+  include_tasks: accounts.yml
 
-- name: Copy over telegraf.conf
-  tags: telegraf, host
-  template:
-    src: "{{ role_path }}/files/telegraf.conf"
-    dest: "{{ telegraf_conf_path }}"
-  register: telegrafconf
-  when: telegraf_stats|bool
-
-- name: Restart telegraf
-  tags: telegraf
-  service:
-    name: telegraf
-    state: restarted
-  when: telegrafconf.changed and telegraf_stats|bool
+- name: Include backup tasks
+  include_tasks: backup.yml

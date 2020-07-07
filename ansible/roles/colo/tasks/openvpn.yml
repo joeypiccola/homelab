@@ -1,0 +1,21 @@
+---
+
+- name: Install OpenVPN package
+  apt:
+    pkg: openvpn
+    state: latest
+
+- name: Enable OpenVPN service
+  become: true
+  systemd:
+    name: openvpn@client.service
+    enabled: false
+    state: stopped
+
+- name: Copy over OpenVPN config
+  become: true
+  template:
+    src: "{{ role_path }}/files/joey_colo.conf"
+    dest: /etc/openvpn/client.conf
+    owner: pi
+    mode: 0600
