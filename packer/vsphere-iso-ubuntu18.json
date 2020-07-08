@@ -27,11 +27,19 @@
             "RAM": 6144,
             "RAM_hot_plug": "{{ user `RAM_hot_plug` }}",
             "RAM_reserve_all": true,
-            "network": "{{ user `network` }}",
-            "disk_size": 30720,
-            "disk_thin_provisioned": "{{ user `disk_thin_provisioned` }}",
+            "storage": [
+                {
+                    "disk_size": 30720,
+                    "disk_thin_provisioned": "{{ user `disk_thin_provisioned` }}"
+                }
+            ],
             "disk_controller_type": "{{ user `disk_controller_type` }}",
-            "network_card": "{{ user `network_card` }}",
+            "network_adapters": [
+                {
+                    "network": "{{ user `network` }}",
+                    "network_card": "{{ user `network_card` }}"
+                }
+            ],
             "convert_to_template": "{{ user `convert_to_template` }}",
             "vcenter_server": "{{ user `vcenter_server` }}",
             "insecure_connection": "{{ user `insecure_connection` }}",
@@ -66,13 +74,13 @@
     ],
     "provisioners": [
         {
-        "type": "shell",
-        "scripts": [
-          "scripts/lin/apt.sh",
-          "scripts/lin/cleanup.sh",
-          "scripts/lin/python.sh",
-          "scripts/lin/ubuntu-prep.sh"
-        ]
-      }
+            "type": "shell",
+            "scripts": [
+                "scripts/lin/apt.sh",
+                "scripts/lin/cleanup.sh",
+                "scripts/lin/python.sh",
+                "scripts/lin/ubuntu-prep.sh"
+            ]
+        }
     ]
 }

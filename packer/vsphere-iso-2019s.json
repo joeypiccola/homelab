@@ -6,48 +6,58 @@
     },
     "builders": [
         {
-        "type": "vsphere-iso",
-        "vm_name": "{{ user `name` }}",
-        "iso_paths": [
-            "[freenas_datastore_0] iso/en_windows_server_2019_x64_dvd_3c2cf1202.iso",
-            "[freenas_datastore_0] iso/VMware-tools-windows-11.0.5-15389592.iso"
-        ],
-        "communicator": "winrm",
-        "winrm_username": "vagrant",
-        "winrm_password": "vagrant",
-        "winrm_timeout": "12h",
-        "winrm_port": "5985",
-        "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-        "shutdown_timeout": "15m",
-        "guest_os_type": "{{ user `guest_os_type` }}",
-        "vm_version": "{{ user `vm_version` }}",
-        "CPUs": 4,
-        "cpu_cores": 2,
-        "CPU_hot_plug": "{{ user `CPU_hot_plug` }}",
-        "RAM": 6144,
-        "RAM_hot_plug": "{{ user `RAM_hot_plug` }}",
-        "network": "{{ user `network` }}",
-        "disk_size": 30720,
-        "disk_thin_provisioned": "{{ user `disk_thin_provisioned` }}",
-        "disk_controller_type": "{{ user `disk_controller_type` }}",
-        "network_card": "{{ user `network_card` }}",
-        "convert_to_template": "{{ user `convert_to_template` }}",
-        "vcenter_server": "{{ user `vcenter_server` }}",
-        "insecure_connection": "{{ user `insecure_connection` }}",
-        "username": "{{ user `username`}}",
-        "password": "{{ user `password` }}",
-        "host": "{{ user `host` }}",
-        "cluster": "{{ user `cluster` }}",
-        "datastore": "{{ user `datastore` }}",
-        "folder": "{{ user `folder` }}",
-        "floppy_files": [
-            "{{ user `answerfile` }}",
-            "scripts/win/winrm.bat",
-            "drivers/",
-            "scripts/win/Install-VMwareToolsVsphere.ps1"
-        ]
-    }],
-    "provisioners": [{
+            "type": "vsphere-iso",
+            "vm_name": "{{ user `name` }}",
+            "iso_paths": [
+                "[freenas_datastore_0] iso/en_windows_server_2019_x64_dvd_3c2cf1202.iso",
+                "[freenas_datastore_0] iso/VMware-tools-windows-11.0.5-15389592.iso"
+            ],
+            "communicator": "winrm",
+            "winrm_username": "vagrant",
+            "winrm_password": "vagrant",
+            "winrm_timeout": "12h",
+            "winrm_port": "5985",
+            "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+            "shutdown_timeout": "15m",
+            "guest_os_type": "{{ user `guest_os_type` }}",
+            "vm_version": "{{ user `vm_version` }}",
+            "CPUs": 4,
+            "cpu_cores": 2,
+            "CPU_hot_plug": "{{ user `CPU_hot_plug` }}",
+            "RAM": 6144,
+            "RAM_hot_plug": "{{ user `RAM_hot_plug` }}",
+            "storage": [
+                {
+                    "disk_size": 30720,
+                    "disk_thin_provisioned": "{{ user `disk_thin_provisioned` }}"
+                }
+            ],
+            "disk_controller_type": "{{ user `disk_controller_type` }}",
+            "network_adapters": [
+                {
+                    "network": "{{ user `network` }}",
+                    "network_card": "{{ user `network_card` }}"
+                }
+            ],
+            "convert_to_template": "{{ user `convert_to_template` }}",
+            "vcenter_server": "{{ user `vcenter_server` }}",
+            "insecure_connection": "{{ user `insecure_connection` }}",
+            "username": "{{ user `username`}}",
+            "password": "{{ user `password` }}",
+            "host": "{{ user `host` }}",
+            "cluster": "{{ user `cluster` }}",
+            "datastore": "{{ user `datastore` }}",
+            "folder": "{{ user `folder` }}",
+            "floppy_files": [
+                "{{ user `answerfile` }}",
+                "scripts/win/winrm.bat",
+                "drivers/",
+                "scripts/win/Install-VMwareToolsVsphere.ps1"
+            ]
+        }
+    ],
+    "provisioners": [
+        {
             "type": "powershell",
             "elevated_user": "vagrant",
             "elevated_password": "vagrant",
@@ -66,10 +76,10 @@
             ]
         },
         {
-          "type": "windows-update",
-          "filters": [
-              "include:$_.Title -like '*Servicing Stack Update for Windows*'"
-          ]
+            "type": "windows-update",
+            "filters": [
+                "include:$_.Title -like '*Servicing Stack Update for Windows*'"
+            ]
         },
         {
             "type": "windows-restart"
@@ -94,5 +104,4 @@
             ]
         }
     ]
-
 }

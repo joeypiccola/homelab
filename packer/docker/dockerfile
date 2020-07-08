@@ -1,10 +1,10 @@
-FROM hashicorp/packer:1.4.5
+FROM hashicorp/packer:1.6.0
 # download, extract, delete tgz, and allow plugin to execute
-ADD https://github.com/rgl/packer-provisioner-windows-update/releases/download/v0.8.0/packer-provisioner-windows-update-linux.tgz /bin/packer-provisioner-windows-update-linux.tgz
+ADD https://github.com/rgl/packer-provisioner-windows-update/releases/download/v0.9.0/packer-provisioner-windows-update-linux.tgz /bin/packer-provisioner-windows-update-linux.tgz
 RUN tar -xzf bin/packer-provisioner-windows-update-linux.tgz -C /bin
 RUN rm /bin/packer-provisioner-windows-update-linux.tgz
 RUN chmod +x /bin/packer-provisioner-windows-update
-# download, rename, and allow plugin to execute
-ADD https://github.com/jetbrains-infra/packer-builder-vsphere/releases/download/v2.3/packer-builder-vsphere-iso.linux /bin/packer-builder-vsphere-iso
-RUN chmod +x /bin/packer-builder-vsphere-iso
+# download, rename, and allow plugin to execute. as of packer 1.6.0 jetbrains-infra is not longer needed
+# ADD https://github.com/jetbrains-infra/packer-builder-vsphere/releases/download/v2.3/packer-builder-vsphere-iso.linux /bin/packer-builder-vsphere-iso
+# RUN chmod +x /bin/packer-builder-vsphere-iso
 WORKDIR /data
