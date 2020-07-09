@@ -80,7 +80,7 @@
                 "scripts/lin/cleanup.sh",
                 "scripts/lin/python.sh",
                 "scripts/lin/ubuntu-prep.sh",
-                "scripts/lin/rebuild-ssh-hostkeys.sh"
+                "scripts/lin/sshcleanup.sh"
             ]
         }
     ]
