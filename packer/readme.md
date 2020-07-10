@@ -4,14 +4,14 @@ All things packer.
 
 ## requirements
 
-| platform | packer | packer-builder-vsphere | packer-provisioner-windows-update | vmware-tools    |
-|----------|--------|------------------------|-----------------------------------|-----------------|
-| docker   | 1.4.4  | 2.3                    | 0.8.0                             | 11.0.5-15389592 |
-| windows  |        |                        |                                   | 11.0.5-15389592 |
+| platform | packer | packer-provisioner-windows-update | vmware-tools    |
+|----------|--------|-----------------------------------|-----------------|
+| docker   | 1.6.0  | 0.9.0                             | 11.0.5-15389592 |
+| windows  |        |                                   | 11.0.5-15389592 |
 
 ### credentials
 
-A file named `variables-cred.json` with the following.
+A file named `variables-cred.json` with the following. This should have rights in vCenter.
 
 ```json
 {
@@ -24,7 +24,6 @@ A file named `variables-cred.json` with the following.
 
 Download the following plugins, place them in either [packer's plugin dir](https://www.packer.io/docs/extending/plugins.html#installing-plugins) or in the root of this directory. If linux allow them to execute.
 
-- [packer-builder-vsphere](https://github.com/jetbrains-infra/packer-builder-vsphere)
 - [packer-provisioner-windows-update](https://github.com/rgl/packer-provisioner-windows-update)
 
 ### building in docker
