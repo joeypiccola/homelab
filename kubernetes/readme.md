@@ -43,6 +43,29 @@ export KUBECONFIG=$PWD/mycluster.conf
 
 ## kubernets dashboard
 
-This is a WIP.
+Deploy the dashboard.
 
 `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml`
+
+Create a service account to access the dashboard.
+
+`kubectl create serviceaccount dashboard-admin-sa`
+
+Create a cluster role binding for the `dashboard-admin-sa` service account to access the dashboard. Binding to `cluster-admin` :( <- prob not a good thing.
+
+`kubectl create clusterrolebinding dashboard-admin-sa --clusterrole=cluster-admin --serviceaccount=default:dashboard-admin-sa`
+
+Get the service account's token
+
+```bash
+kubectl get secrets
+kubectl describe secret dashboard-admin-sa-token-mbs6n
+```
+
+Create a local proxy.
+
+`kubectl proxy`
+
+Access the dashboard via the URL below using the token retrieved via `kubectl describe secret`.
+
+[http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/)
