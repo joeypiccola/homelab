@@ -52,7 +52,7 @@ variable "kube_config" {
   type = map
   default = {
     admin_user   = "kube_admin"
-    master_count = 1
+    master_count = 2
     node_count   = 3
   }
 }
