@@ -1,0 +1,7 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - role: k8s
+      tags:
+        - k8s

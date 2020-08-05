@@ -1,0 +1,10 @@
+---
+
+- name: Update apt
+  apt: update_cache=yes
+
+- name: nfs pkg
+  become: true
+  package:
+    name: nfs-common
+    state: present
