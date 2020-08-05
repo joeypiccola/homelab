@@ -1,0 +1,17 @@
+---
+configInline:
+  address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 10.0.3.200-10.0.3.209
+controller:
+  image:
+    repository: metallb/controller
+    tag: v0.8.1
+    pullPolicy: IfNotPresent
+speaker:
+  image:
+    repository: metallb/speaker
+    tag: v0.8.1
+    pullPolicy: IfNotPresent

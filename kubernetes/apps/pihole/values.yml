@@ -1,0 +1,29 @@
+---
+virtualHost: pihole-k8.piccola.us
+
+DNS1: 10.0.3.24
+DNS2: 10.0.3.22
+
+serviceTCP:
+  #loadBalancerIP: 10.0.3.220
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+  type: LoadBalancer
+
+serviceUDP:
+  #loadBalancerIP: 10.0.3.220
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+  type: LoadBalancer
+
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx-ingress
+  enabled: true
+  hosts:
+    - pihole-k8.piccola.us
+
+persistentVolumeClaim:
+  enabled: true
+  existingClaim: pihole
+  size: 200mi

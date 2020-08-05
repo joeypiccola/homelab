@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: pihole
+    labels:
+        name: pihole
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: pihole
+  name: pihole
+spec:
+  capacity:
+    storage: 200Mi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: freenas.piccola.us
+    path: /mnt/file_shares/k8_apps/pihole
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: pihole
+  name: pihole
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Mi

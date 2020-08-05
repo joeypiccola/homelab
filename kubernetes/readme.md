@@ -25,47 +25,34 @@ CONFIG_FILE=inventory/mycluster/hosts.yml python3 contrib/inventory_builder/inve
 
 This creates `kubespray/inventory/mycluster/hosts.yml`. Modify as needed to ensure masters, nodes, and etcd is setup as needed.
 
+### additional setup
+
+Edit `group_vars/k8s-cluster/k8s-cluster.yml` and set `kubeconfig_localhost` to `true`. This will copy over an `admin.conf` to `kubespray/inventory/mycluster/artifacts/admin.conf` during the ansible run.
+
 ### building
 
 Build using ansible leveraging the private key over in ansible.
 
 `ansible-playbook -i ./inventory/mycluster/hosts.yml -u kube_admin -b --key-file=/Users/jpiccola/Documents/github/homelab/ansible/keys/id_rsa cluster.yml`
 
+#### additional building
+
+Use `pb_k8s.yml` playbook to install NFS on all nodes. Figure this out, cd to ansible directory.
+
+`ansible-playbook -i ../kubernetes/kubespray/inventory/mycluster/hosts.yml -u kube_admin pb_k8s.yml`
+
 ## kubectl
 
 ### config
 
+You have two options here 1) get the `admin.conf` downloaded from kubespray or 2) get it manually via SSH.
+
 SSH to a master and get `/etc/kubernetes/admin.conf` and place it locally `./mycluster.conf`. Export `KUBECONFIG` as shown below. Now you can run `kubectl` commands (e.g. `kubectl cluster-info`).
+
+Either way, once you got it `export` it as `KUBECONFIG`.
 
 ```bash
 export KUBECONFIG=$PWD/mycluster.conf
 ```
 
-## kubernets dashboard
-
-Deploy the dashboard.
-
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml`
-
-Create a service account to access the dashboard.
-
-`kubectl create serviceaccount dashboard-admin-sa`
-
-Create a cluster role binding for the `dashboard-admin-sa` service account to access the dashboard. Binding to `cluster-admin` :( <- prob not a good thing.
-
-`kubectl create clusterrolebinding dashboard-admin-sa --clusterrole=cluster-admin --serviceaccount=default:dashboard-admin-sa`
-
-Get the service account's token
-
-```bash
-kubectl get secrets
-kubectl describe secret dashboard-admin-sa-token-mbs6n
-```
-
-Create a local proxy.
-
-`kubectl proxy`
-
-Access the dashboard via the URL below using the token retrieved via `kubectl describe secret`.
-
-[http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/)
+### notes

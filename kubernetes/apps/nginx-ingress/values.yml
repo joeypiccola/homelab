@@ -1,0 +1,23 @@
+---
+controller:
+  image:
+    # repository: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
+    # tag: "0.32.0"
+    pullPolicy: IfNotPresent
+    # www-data -> uid 101
+    runAsUser: 101
+    allowPrivilegeEscalation: true
+  ingressClass: nginx-ingress
+#t  config:
+#t    proxy-buffer-size: "64k"
+  hostNetwork: true
+  externalTrafficPolicy: "Local"
+#t  extraArgs:
+#t    tcp-services-configmap: "default/tcp-services"
+#t    default-ssl-certificate: "nginx-ingress/corp-t-vo-us"
+
+# TCP service key:value pairs
+# Ref: https://github.com/kubernetes/contrib/tree/master/ingress/controllers/nginx/examples/tcp
+##
+#tcp:
+#t  1688: "pykms/pykms:1688"
