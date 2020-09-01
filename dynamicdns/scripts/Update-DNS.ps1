@@ -3,7 +3,7 @@ $configDataFile = Join-Path -Path $PSScriptRoot -ChildPath 'configData.json'
 $configData = Get-Content -Path $configDataFile | ConvertFrom-Json
 # try and get external IP
 try {
-    $currentIP = (Invoke-RestMethod -Uri $configData.icanhazipUri).TrimEnd()
+    $currentIP = (Invoke-RestMethod -Uri $configData.icanhazipUri -ErrorAction Stop).TrimEnd()
     if ([string]::IsNullOrEmpty($currentIP)) {
         Write-Error "Failed to get external ip via $($configData.icanhazipUri)."
     }
