@@ -1,0 +1,10 @@
+---
+- hosts: pidoorbell
+  become: true
+  roles:
+    - role: base
+      tags:
+        - base
+    - role: pidoorbell
+      tags:
+        - pidoorbell

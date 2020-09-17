@@ -1,5 +1,5 @@
 [colo]
-10.0.3.53 hostname=pi4-0
+10.0.3.65 hostname=colo
 
 [colo:vars]
 telegraf_stats=true
@@ -7,8 +7,14 @@ telegraf_stats=true
 [pizerosensor]
 10.0.3.107 hostname=pi0-a location=crawl_space
 10.0.3.112 hostname=pi0-b location=mech_room
-10.0.3.113 hostname=pi0-c location=outside
+10.0.3.96  hostname=pi0-c location=outside
 10.0.3.115 hostname=pi0-d location=garage
+
+[pidoorbell]
+10.0.3.122 hostname=pi0-doorbell
+
+[pidoorbell:vars]
+telegraf_stats=true
 
 [pizerosensor:vars]
 telegraf_stats=true

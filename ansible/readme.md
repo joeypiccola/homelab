@@ -8,6 +8,7 @@ All things ansible.
 - RasPi environmental monitoring sensors
 - Co-located RasPi for backups
 - Various debian telgraf configs for RasPis and other debian systems
+- RasPi doorbell
 
 ## requirements
 

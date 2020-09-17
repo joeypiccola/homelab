@@ -1,0 +1,42 @@
+---
+
+- name: Install pip3 packages
+  become: true
+  pip:
+    name:
+    - unifi-video
+    - requests
+    - urllib3
+    state: present
+    executable: pip3
+
+- name: Copy over python script
+  become: true
+  tags: python
+  template:
+    src: "{{ role_path }}/files/doorbell.py"
+    dest: "{{ python_script_path }}"
+    owner: pi
+    mode: 0755
+
+- name: Copy over telegraf.conf
+  tags: telegraf, host
+  template:
+    src: "{{ role_path }}/files/telegraf.conf"
+    dest: "{{ telegraf_conf_path }}"
+  register: telegrafconf
+  when: telegraf_stats|bool
+
+- name: Restart telegraf
+  tags: telegraf
+  service:
+    name: telegraf
+    state: restarted
+  when: telegrafconf.changed and telegraf_stats|bool
+
+- name: Create cron to run doorbell script at boot
+  cron:
+    name: "run doorbell script at boot"
+    special_time: reboot
+    job: "/home/pi/doorbell.py"
+    state: present
