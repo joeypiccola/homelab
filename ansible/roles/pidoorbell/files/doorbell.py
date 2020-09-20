@@ -20,6 +20,7 @@ GPIO.setup(buttonClosedLED, GPIO.OUT)
 
 try:
     while True:
+        time.sleep(.1)
         buttonState = GPIO.input(buttonPin)
         if buttonState == False:
             # turn off red led and turn on green led
