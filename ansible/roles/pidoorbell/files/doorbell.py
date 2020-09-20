@@ -20,8 +20,11 @@ GPIO.setup(buttonClosedLED, GPIO.OUT)
 
 try:
     while True:
+        # sleep a bit to keep CPU from going crazy
         time.sleep(.1)
+        # read button input
         buttonState = GPIO.input(buttonPin)
+        # if we're false then signal has gone to ground and button has been pushed
         if buttonState == False:
             # turn off red led and turn on green led
             GPIO.output(buttonOpenLED, 0)
