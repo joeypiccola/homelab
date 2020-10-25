@@ -25,7 +25,7 @@ Install roles via the Galaxy, if any.
 Use the following to hash passwords for use with the Ansible user module. Might need to install `passlib` via `pip3 install passlib`.
 
 ```bash
-python -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"
+python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"
 ```
 
 ## encryption
