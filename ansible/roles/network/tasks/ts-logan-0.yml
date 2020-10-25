@@ -25,7 +25,7 @@
   ios_config:
     parents: interface GigabitEthernet0/8
     lines:
-      - description ts-logan-0 <-> ss-logan-0
+      - description <-> ss-logan-0
       - switchport mode trunk
       - switchport trunk native vlan 2
 
