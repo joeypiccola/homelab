@@ -1,5 +1,5 @@
 [colo]
-10.0.3.65 hostname=colo
+10.0.60.10 hostname=colo
 
 [colo:vars]
 telegraf_stats=true
