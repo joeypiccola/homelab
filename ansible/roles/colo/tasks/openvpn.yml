@@ -9,8 +9,8 @@
   become: true
   systemd:
     name: openvpn@client.service
-    enabled: false
-    state: stopped
+    enabled: yes
+    state: started
 
 - name: Copy over OpenVPN config
   become: true
