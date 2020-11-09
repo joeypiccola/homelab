@@ -18,16 +18,17 @@
       - "switchport mode {{ item.mode }}"
       - "switchport access vlan {{ item.vlan }}"
   with_items:
-    - {interface: GigabitEthernet0/2, description: south_yard camera, mode: access, vlan: 10}
-    - {interface: GigabitEthernet0/3, description: backyard camera, mode: access, vlan: 10}
-    - {interface: GigabitEthernet0/4, description: front_porch camera, mode: access, vlan: 10}
-    - {interface: GigabitEthernet0/5, description: printer, mode: access, vlan: 3}
-    - {interface: GigabitEthernet0/11, description: office-a, mode: access, vlan: 3}
-    - {interface: GigabitEthernet0/7, description: office-b, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/1, description: south_yard camera, mode: access, vlan: 10}
+    - {interface: GigabitEthernet1/0/2, description: backyard camera, mode: access, vlan: 10}
+    - {interface: GigabitEthernet1/0/3, description: front_porch camera, mode: access, vlan: 10}
+    - {interface: GigabitEthernet1/0/4, description: printer, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/5, description: office-a, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/6, description: office-b, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/10, description: mech-room-lab, mode: access, vlan: 3}
 
 - name: configure unifi-ap-pro interface
   ios_config:
-    parents: interface GigabitEthernet0/8
+    parents: interface GigabitEthernet1/0/7
     lines:
       - description unifi-ap-pro
       - switchport mode trunk
@@ -36,24 +37,24 @@
 
 - name: configure century_link_ont interface
   ios_config:
-    parents: interface GigabitEthernet0/9
+    parents: interface GigabitEthernet1/0/8
     lines:
       - description century_link_ont
       - switchport mode trunk
       - switchport trunk allowed vlan 201
 
-- name: configure ss-logan-0 <-> cs-logan-0 interface
+- name: configure ss-logan-0 <-> ts-logan-0 interface
   ios_config:
-    parents: interface GigabitEthernet0/24
+    parents: interface GigabitEthernet1/0/9
     lines:
-      - description <-> cs-logan-0
+      - description <-> ts-logan-0
       - switchport mode trunk
       - switchport trunk native vlan 2
 
-- name: configure ss-logan-0 <-> ts-logan-0 interface
+- name: configure ss-logan-0 <-> cs-logan-0 interface
   ios_config:
-    parents: interface GigabitEthernet0/10
+    parents: interface GigabitEthernet1/0/24
     lines:
-      - description <-> ts-logan-0
+      - description <-> cs-logan-0
       - switchport mode trunk
       - switchport trunk native vlan 2
