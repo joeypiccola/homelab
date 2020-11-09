@@ -27,5 +27,5 @@ telegraf_stats=true
 
 [switches]
 10.0.2.33 hostname=cs-logan-0
-10.0.2.5  hostname=ss-logan-0
+10.0.2.7  hostname=ss-logan-0
 10.0.2.6  hostname=ts-logan-0
