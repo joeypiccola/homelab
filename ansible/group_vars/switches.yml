@@ -1,8 +1,8 @@
 ---
-ansible_network_os: ios
 ansible_user: cisco
-vtp_version: 1
+ansible_network_os: ios
 network_layer: 2
+vtp_version: 1
 ansible_password: !vault |
   $ANSIBLE_VAULT;1.1;AES256
   63626130653361646237346465383134636364623365316230313838653265343331643833333133
