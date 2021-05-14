@@ -5,6 +5,15 @@
     pkg: parted
     state: latest
 
+- name: Reboot to fix the things
+  cron:
+    name: "Schedule reboot to fix things bc i am lazy"
+    hour: "9"
+    minute: "0"
+    weekday: "0,3"
+    job: "/sbin/shutdown -r"
+    state: present
+
 - name: Include openVPN tasks
   include_tasks: openvpn.yml
 
