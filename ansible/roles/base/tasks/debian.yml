@@ -6,3 +6,39 @@
 - name: Set timezone to American/Denver
   timezone:
     name: "{{ timezone }}"
+
+- name: Set hostname
+  become: true
+  tags: host
+  hostname:
+    name: "{{ hostvars[inventory_hostname].hostname }}"
+
+- name: Create personal user
+  user:
+    name: "{{ personal_user }}"
+    groups:
+     - sudo
+
+- name: Add personal user authorized key
+  authorized_key:
+    user: "{{ personal_user }}"
+    key: "{{ personal_user_pub }}"
+
+- name: Setup passwordless sudo for personal user
+  lineinfile:
+    path: /etc/sudoers.d/"{{ personal_user }}"
+    line: '{{ personal_user }} ALL=(ALL:ALL) NOPASSWD:ALL'
+    state: present
+    mode: 0440
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: Install apt packages
+  tags: packages
+  become: true
+  apt:
+    force_apt_get: true
+    pkg:
+    - acl
+    - htop
+    state: present
