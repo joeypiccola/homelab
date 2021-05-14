@@ -1,3 +1,4 @@
 ---
 # from galaxy
-gantsign.oh-my-zsh
+- src: gantsign.oh-my-zsh
+- src: geerlingguy.ruby

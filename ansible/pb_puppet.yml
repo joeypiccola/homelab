@@ -5,7 +5,8 @@
     - role: base
       tags:
         - base
-    - role: gantsign.oh-my-zsh
-      users:
-        - username: "{{ personal_user }}"
-    - role: geerlingguy.ruby
+    - role: puppet
+      tags:
+        - puppet
+    - role: galaxy_roles/gantsign.oh-my-zsh
+    - role: galaxy_roles/geerlingguy.ruby

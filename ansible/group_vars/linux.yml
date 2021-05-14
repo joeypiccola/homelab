@@ -1,6 +1,12 @@
 ---
 ansible_user: ansible
-ruby_install_gems:
-  - colorls
-  - hiera-eyaml
-ruby_install_gems_user: joey
+ruby_install_gems_user: "{{ personal_user }}"
+users:
+  - username: "{{ personal_user }}"
+    oh_my_zsh:
+      theme: robbyrussell
+      plugins:
+        - git
+        - zsh-autosuggestions
+        - zsh-completions
+        - zsh-syntax-highlighting
