@@ -3,7 +3,6 @@
 # setup python
 import time
 import RPi.GPIO as GPIO
-from unifi_video import UnifiVideoAPI
 import http.client, urllib
 import requests
 
@@ -29,9 +28,9 @@ try:
             # turn off red led and turn on green led
             GPIO.output(buttonOpenLED, 0)
             GPIO.output(buttonClosedLED, 1)
-            # get snapshot from camera
-            uva = UnifiVideoAPI(username='{{ unifi_user }}', password='{{ unifi_pass }}', addr='{{ unifi_server }}')
-            uva.get_camera('front_porch').snapshot('/home/pi/snapshot.jpg')
+            # get snapshot from blueiris NVR (front_porch_hd cam) and save file locally
+            url = "http://{{ blueiris_ip }}:81/image/front_porch_hd&user={{ blueiris_user }}&pw={{ blueiris_pass }}"
+            urllib.request.urlretrieve(url, '/home/pi/snapshot.jpg')
             # notify pushover
             r_pushover = requests.post("https://api.pushover.net/1/messages.json",
                 data = {

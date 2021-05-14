@@ -4,7 +4,6 @@
   become: true
   pip:
     name:
-    - unifi-video
     - requests
     - urllib3
     state: present
