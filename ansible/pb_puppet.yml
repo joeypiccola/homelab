@@ -1,0 +1,11 @@
+---
+- hosts: puppet
+  become: true
+  roles:
+    - role: base
+      tags:
+        - base
+    - role: gantsign.oh-my-zsh
+      users:
+        - username: "{{ personal_user }}"
+    - role: geerlingguy.ruby
