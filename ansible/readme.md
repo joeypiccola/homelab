@@ -32,9 +32,13 @@ python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_
 
 When running `ansbile` or `ansible-vault` it is reading your `ansible.cfg` file and the `vault_password_file` variable to see where your `.vault_pass` file is located.
 
-### Variable-level encryption
+### file and variable encryption
 
-To encrypt use `ansible-vault`.
+There is the easy way and the hard way ¯\_(ツ)_/¯.
+
+#### The hard way
+
+To encrypt the hard way use `ansible-vault`.
 
 ```bash
 > ansible-vault encrypt_string 'mySecret' --name 'myVar'
@@ -48,7 +52,7 @@ myVar: !vault |
 Encryption successful
 ```
 
-To decrypt use `ansible` locally in debug.
+To decrypt the hard way use `ansible` locally in debug.
 
 ```bash
 > ansible localhost -m debug -a var='colo_ovpn_remote' -e "@./roles/colo/vars/main.yml"
@@ -57,9 +61,7 @@ localhost | SUCCESS => {
 }
 ```
 
-### File-level encryption
-
-Fully encrypted files can be easily decrypted in VSCode using Eric's Ho's [ansible-vault](https://marketplace.visualstudio.com/items?itemName=dhoeric.ansible-vault) extension. You can also call `ansible-vault` directly to decrypt and encrypt files.
+Example below for full files.
 
 ```bash
 > ansible-vault decrypt ./roles/switch/vars/main.yml
@@ -67,6 +69,12 @@ Decryption successful
 > ansible-vault encrypt ./roles/switch/vars/main.yml
 Encryption successful
 ```
+
+#### The easy way
+
+Use wolfmah's [ansible-vault-inline](https://marketplace.visualstudio.com/items?itemName=wolfmah.ansible-vault-inline&ssr=false#overview) extension. Use cmd_alt-0 (zero).
+
+<img src="docs/enc_demo.gif" width="500">
 
 ## keys
 
