@@ -1,7 +1,8 @@
 ---
 
 - name: Update apt
-  apt: update_cache=yes
+  apt:
+    update_cache: yes
 
 - name: Set timezone to American/Denver
   timezone:
@@ -38,7 +39,5 @@
   become: true
   apt:
     force_apt_get: true
-    pkg:
-    - acl
-    - htop
+    pkg: "{{ apt_packages }}"
     state: present

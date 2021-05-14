@@ -10,3 +10,6 @@ users:
         - zsh-autosuggestions
         - zsh-completions
         - zsh-syntax-highlighting
+apt_packages:
+  - acl
+  - htop
