@@ -23,7 +23,6 @@
     - {interface: GigabitEthernet1/0/3, description: front_porch camera, mode: access, vlan: 10}
     - {interface: GigabitEthernet1/0/4, description: printer, mode: access, vlan: 3}
     - {interface: GigabitEthernet1/0/5, description: office-a, mode: access, vlan: 3}
-    - {interface: GigabitEthernet1/0/6, description: office-b, mode: access, vlan: 3}
     - {interface: GigabitEthernet1/0/10, description: mech-room-lab, mode: access, vlan: 3}
 
 - name: configure unifi-ap-pro interface
@@ -47,7 +46,15 @@
   ios_config:
     parents: interface GigabitEthernet1/0/9
     lines:
-      - description <-> ts-logan-0
+      - description <-> ts-logan-0 (garage)
+      - switchport mode trunk
+      - switchport trunk native vlan 2
+
+- name: configure ss-logan-0 <-> ts-logan-1 interface
+  ios_config:
+    parents: interface GigabitEthernet1/0/6
+    lines:
+      - description <-> ts-logan-1 (office-b)
       - switchport mode trunk
       - switchport trunk native vlan 2
 
