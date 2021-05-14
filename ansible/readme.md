@@ -72,7 +72,7 @@ Encryption successful
 
 #### The easy way
 
-Use wolfmah's [ansible-vault-inline](https://marketplace.visualstudio.com/items?itemName=wolfmah.ansible-vault-inline&ssr=false#overview) extension. Use cmd_alt-0 (zero).
+Use wolfmah's [ansible-vault-inline](https://marketplace.visualstudio.com/items?itemName=wolfmah.ansible-vault-inline&ssr=false#overview) extension. Use cmd + alt + 0 (zero).
 
 <img src="docs/enc_demo.gif" width="500">
 
