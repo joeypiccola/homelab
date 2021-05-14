@@ -11,18 +11,7 @@
   become: true
   apt:
     force_apt_get: true
-    pkg:
-    - python-rpi.gpio
-    - python3-rpi.gpio
-    - i2c-tools
-    - build-essential
-    - python-pip
-    - python-dev
-    - python-smbus
-    - python3-pip
-    - ntp
-    - ntpstat
-    - dnsutils
+    pkg: "{{ apt_packages }}"
     state: present
 
 - name: Set hostname

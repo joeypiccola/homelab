@@ -1,0 +1,15 @@
+---
+ansible_user: pi
+apt_packages:
+  - python-rpi.gpio
+  - python3-rpi.gpio
+  - i2c-tools
+  - build-essential
+  - python-pip
+  - python-dev
+  - python-smbus
+  - python3-pip
+  - ntp
+  - ntpstat
+  - dnsutils
+telegraf_stats: true
