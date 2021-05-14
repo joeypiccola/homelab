@@ -1,0 +1,6 @@
+---
+ansible_user: ansible
+ruby_install_gems:
+  - colorls
+  - hiera-eyaml
+ruby_install_gems_user: joey

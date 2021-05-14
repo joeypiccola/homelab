@@ -1,5 +1,4 @@
 ---
-ansible_user: pi
 ansible_ssh_private_key_file: ./keys/id_rsa
 timezone: America/Denver
 telegraf_output_urls: http://influxdb.piccola.us:8086
@@ -14,3 +13,5 @@ ntp_servers:
 dhcp_servers:
   - 10.0.3.24
   - 10.0.3.22
+personal_user: joey
+personal_user_pub: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8XvA+caTkxvxQiJRAc5gY7B/WziUadAVl4AMd0KYvly25/prJ8jRFbH1Dry9g3dyKBMjgBHonKXRRGGv6p2wiIf77Dg2ikL0p4+FsLJ7wI8OUEXNjR0OMq7lftf78qAyVBnzFDL0B198mwCTyq3j3NDbIGXkSg5ArEwsy2hteWp6QZy21SZ3p4MUhgHffPRTvemQjMZSE2uML6xlgkgFsXx7wPgVqZot3phrQnengzSHtD7n6fKkKWuaQASZgX2Ysc8VAvypQ9Am/oHxSdVHS/0f+wEeg3MBSXUxaizJfwXkuFtZtMiOVGyVJOojpWOeJEPZL8NqDxfXhyS07iuXTLkOed6yi1OWC+VlBwlLWUzjKF5zLeF7XawNc3TAx7x+T4yDzgZTbqnn4xcUDCVGFxq550DobryHkHLx6sFWsblhSAkdeuykZEPNeTSFLyi4MnX78gGe7vqr7ibJql7wul95twaELHaApcfcrO5qEOzd50WfLkiySgAUmFrwj/+M= Joey Piccola
