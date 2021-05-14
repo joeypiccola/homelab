@@ -59,11 +59,12 @@
     - {interface: GigabitEthernet1/0/19, mode: access, vlan: 202, description: esxi4-ob4-iscsi-a}
     - {interface: GigabitEthernet1/0/22, mode: access, vlan: 204, description: esxi4-pci3-vMotion}
     - {interface: GigabitEthernet1/0/23, mode: access, vlan: 204, description: esxi4-pci4-vMotion}
-    - {interface: GigabitEthernet1/0/24, mode: access, vlan: 3  , description: dc04}
+    - {interface: GigabitEthernet1/0/24, mode: access, vlan: 3  , description: colo.ad.piccola.us}
     - {interface: GigabitEthernet1/0/28, mode: access, vlan: 205, description: esxi3-ob2-iscsi-c}
     - {interface: GigabitEthernet1/0/29, mode: access, vlan: 205, description: esxi4-ob2-iscsi-c}
     - {interface: GigabitEthernet1/0/30, mode: access, vlan: 205, description: freenas-igb2-iSCSI-c}
     - {interface: GigabitEthernet1/0/31, mode: access, vlan: 3 , description: taylor-colo-raspi4}
+    - {interface: GigabitEthernet1/0/32, mode: access, vlan: 3 , description: box.ad.piccola.us}
 
 - name: configure cs-logan-0 <-> edgerouter-eth0
   ios_config:
