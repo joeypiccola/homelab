@@ -7,7 +7,8 @@ All things ansible.
 - Homelab networks (Cisco switchces and Ubiquity router)
 - RasPi environmental monitoring sensors
 - Co-located RasPi for backups
-- Various debian telgraf configs for RasPis and other debian systems
+- Various debian telegraf configs for RasPis and other debian systems
+- Puppet (installed gems and user mgmt)
 - RasPi doorbell
 
 ## requirements
