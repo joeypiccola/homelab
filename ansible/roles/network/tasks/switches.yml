@@ -3,7 +3,7 @@
 - name: configure host naming
   ios_system:
     hostname: "{{ hostvars[inventory_hostname].hostname }}"
-    domain_name: piccola.us
+    domain_name: "{{ domain_dns_name }}"
 
 - name: service config
   ios_config:
@@ -44,11 +44,11 @@
     name_servers:
       - 10.0.3.24
 
-- name: Include vlans varible file
+- name: Include vlans variable file
   include_vars:
     file: vlans.yml
 
-- name: include switch specicic configuration
+- name: include switch specific configuration
   include_tasks: "{{ hostvars[inventory_hostname].hostname }}.yml"
   when: hostname is defined
 
