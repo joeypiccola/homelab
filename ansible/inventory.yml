@@ -1,0 +1,61 @@
+---
+
+routers:
+  hosts:
+    10.0.2.1:
+      hostname: cr-logan-0
+switches:
+  hosts:
+    10.0.2.33:
+      hostname: cs-logan-0
+    10.0.2.7:
+      hostname: ss-logan-0
+    10.0.2.6:
+      hostname: ts-logan-0
+    10.0.2.5:
+      hostname: ts-logan-1
+
+pidoorbell:
+  hosts:
+    10.0.3.122:
+      hostname: pi0-doorbell
+
+pizerosensor:
+  hosts:
+    10.0.3.107:
+      hostname: pi0-a
+      location: crawl_space
+    10.0.3.112:
+      hostname: pi0-b
+      location: mech_room
+    10.0.3.96:
+      hostname: pi0-c
+      location: outside
+    10.0.3.115:
+      hostname: pi0-d
+      location: garage
+
+colo:
+  hosts:
+    10.0.60.10:
+      hostname: colo
+
+puppet:
+  hosts:
+    10.0.3.104:
+      hostname: puppet
+
+network:
+  children:
+    routers:
+    switches:
+
+debian:
+  children:
+    puppet:
+
+raspbian:
+  children:
+    pizerosensor:
+    colo:
+    pidoorbell:
