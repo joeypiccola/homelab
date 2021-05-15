@@ -90,3 +90,7 @@ ping all hosts.
 run `pb_colo` playbook.
 
 `ansible-playbook pb_colo.yml`
+
+run `pb_network` which includes `switches` and `network` but only run it on `switches` with `--limit`.
+
+`ansible-playbook pb_network.yml --limit switches`
