@@ -42,7 +42,8 @@
 - name: configure name servers
   ios_system:
     name_servers:
-      - 10.0.3.24
+      - "{{ name_servers[0] }}"
+      - "{{ name_servers[1] }}"
 
 - name: Include vlans variable file
   include_vars:

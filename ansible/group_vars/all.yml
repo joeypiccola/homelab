@@ -13,6 +13,9 @@ ntp_servers:
 dhcp_servers:
   - 10.0.3.24
   - 10.0.3.22
+name_servers:
+  - 10.0.3.24
+  - 10.0.3.22
 personal_user: joey
 domain_dns_name: piccola.us
 domain_win_name: ad.piccola.us
