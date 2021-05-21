@@ -18,10 +18,26 @@ serviceUDP:
 
 ingress:
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/ssl-redirect: "true"
     kubernetes.io/ingress.class: nginx-ingress
+    kubernetes.io/tls-acme: "true"
+#    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   enabled: true
   hosts:
     - pihole-k8.piccola.us
+  tls:
+  - hosts:
+    - pihole-k8.piccola.us
+    secretName: pihole-k8
+#  rules:
+#  - host: pihole-k8.piccola.us
+#    http:
+#      paths:
+#      - backend:
+#          serviceName: pihole-kubernetes-tcp
+#          servicePort: 80
+#        path: /
 
 persistentVolumeClaim:
   enabled: true

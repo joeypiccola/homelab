@@ -33,13 +33,19 @@ Edit `group_vars/k8s-cluster/k8s-cluster.yml` and set `kubeconfig_localhost` to 
 
 Build using ansible leveraging the private key over in ansible.
 
+Test connection
+
+`ansible -i ./inventory/mycluster/hosts.yml all -m ping --key-file=/Users/jpiccola/Documents/github/homelab/ansible/keys/id_rsa -u kube_admin`
+
+Build it!
+
 `ansible-playbook -i ./inventory/mycluster/hosts.yml -u kube_admin -b --key-file=/Users/jpiccola/Documents/github/homelab/ansible/keys/id_rsa cluster.yml`
 
 #### additional building
 
-Use `pb_k8s.yml` playbook to install NFS on all nodes. Figure this out, cd to ansible directory.
+Use `pb_k8s.yml` playbook to install NFS on all nodes. You'll need to change `ansible_user` in `groups_vars/all.yml` to `kube_admin`. Figure this out, cd to ansible directory.
 
-`ansible-playbook -i ../kubernetes/kubespray/inventory/mycluster/hosts.yml -u kube_admin pb_k8s.yml`
+`ansible-playbook -i ../kubernetes/kubespray/inventory/mycluster/hosts.yml pb_k8s.yml`
 
 ## kubectl
 
@@ -52,7 +58,8 @@ SSH to a master and get `/etc/kubernetes/admin.conf` and place it locally `./myc
 Either way, once you got it `export` it as `KUBECONFIG`.
 
 ```bash
-export KUBECONFIG=$PWD/mycluster.conf
+export KUBECONFIG=$PWD/admin.conf
+export KUBECONFIG=~/Documents/github/homelab/kubernetes/kubespray/inventory/mycluster/artifacts/admin.conf
 ```
 
 ### notes

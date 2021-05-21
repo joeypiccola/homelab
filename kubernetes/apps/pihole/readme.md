@@ -19,3 +19,7 @@ Setup pihole prerequisites.
 Install pihole via helm leveraging the values in `values.yml`.
 
 `helm install pihole-kubernetes -f values.yml mojo2600/pihole --namespace pihole`
+
+Delete
+
+`helm uninstall pihole-kubernetes --namespace pihole`
