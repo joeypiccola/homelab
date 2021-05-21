@@ -8,21 +8,16 @@ firewall_groups:
       - 140.82.112.0/20
       - 185.199.108.0/22
       - 92.30.252.0/22
-  - name: UniFi_Video_Ports
+  - name: RTSP
     type: port
-    description: UniFi Video Ports
+    description: rtsp port
     elements:
-      - 22
-      - 6666
-      - 7004
-      - 7080
-      - 7442
-      - 7443
-  - name: UniFi_Video_Servers
+      - 554
+  - name: BlueIris_Server
     type: address
-    description: UniFi Video Ports
+    description: blue iris server
     elements:
-      - 10.0.3.58
+      - 10.0.3.74
   - name: IP_Cameras
     type: network
     description: ip camera networks
