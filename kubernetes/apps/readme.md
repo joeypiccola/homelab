@@ -6,6 +6,7 @@ The following is a list of apps managed here.
 - nginx-ingress
 - pihole
 - kubernetes-dashboard
+- cert-manager
 
 ## helm
 
