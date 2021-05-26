@@ -24,4 +24,7 @@ resource "aws_acm_certificate" "aws_crt" {
   private_key       = acme_certificate.acme_crt.private_key_pem
   certificate_body  = acme_certificate.acme_crt.certificate_pem
   certificate_chain = "${acme_certificate.acme_crt.certificate_pem}${acme_certificate.acme_crt.issuer_pem}"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
