@@ -4,3 +4,6 @@ app = {
   region        = "us-west-1"
   zone          = "joeypiccola-aws.com"
 }
+
+acme_email = "joey.piccola@gmail.com"
+cert_sans  = ["web-test", "web-dev","web-stage"]
