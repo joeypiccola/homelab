@@ -9,7 +9,8 @@ variable "app" {
 }
 
 variable "cert_sans" {
-  type = list(any)
+  type    = list(any)
+  default = []
 }
 
 variable "acme_email" {
