@@ -14,7 +14,7 @@ resource "aws_lb" "lb" {
   subnets            = data.aws_subnet_ids.default_vpc_subnets.ids
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [
+  security_groups = [
     aws_security_group.sg.id
   ]
   access_logs {
