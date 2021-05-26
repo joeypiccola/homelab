@@ -6,7 +6,8 @@ All things terraform.
 
 - Kubernetes cluster
 - Various AWS exercises
-  - {app}.joeypiccola-aws.com
+  - **Objective**: Build webserver farm with HTTPS load balancer. Leverage LetsEncrypt certificate on the front-end. Leverage `locals`.
+    - name web-a.joeypiccola-aws.com ✅
     - ec2 web server ✅
     - load balancer ✅
     - load balancer listener ✅
@@ -14,7 +15,10 @@ All things terraform.
       - target group attachment ✅
     - security group ✅
     - route53 alias record ✅
-  - Lets Encrypt (WIP)
-    - getting cert ✅
-    - importing to AWS ACM ✅
-    - attach to load balancer
+    - LetsEncrypt cert ✅
+      - ensure sans are dynamically added to cert ✅
+      - import LetsEncrypt cert to AWS ✅
+      - attached to load balancer ✅
+  - **Objective**: Get LetsEncrypt cert, import into AWS ACM
+    - get cert ✅
+    - importing to AWS ACM and output `arn` ✅
