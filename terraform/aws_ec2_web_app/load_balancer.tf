@@ -10,7 +10,7 @@ data "aws_subnet_ids" "default_vpc_subnets" {
 
 # create a app load balancer
 resource "aws_lb" "lb" {
-  name               = "${var.app.name}-lb"
+  name               = "${var.name}-lb"
   subnets            = data.aws_subnet_ids.default_vpc_subnets.ids
   internal           = false
   load_balancer_type = "application"
@@ -25,7 +25,7 @@ resource "aws_lb" "lb" {
 
 # make a target group
 resource "aws_lb_target_group" "tg" {
-  name     = "${var.app.name}-tg"
+  name     = "${var.name}-tg"
   port     = 80
   protocol = "HTTP"
   vpc_id   = data.aws_vpc.default_vpc.id

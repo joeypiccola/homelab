@@ -4,7 +4,7 @@ variable "sg_allowed_ports" {
 }
 
 resource "aws_security_group" "sg" {
-  name = "${var.app.name}-sg"
+  name = "${var.name}-sg"
   dynamic "ingress" {
     iterator = port
     for_each = var.sg_allowed_ports

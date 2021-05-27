@@ -1,9 +1,9 @@
 provider "aws" {
-  region = var.app.region # <-- using default here does not work, why?
+  region = var.region
 }
 
 provider "acme" {
-  server_url = "https://acme-staging-v02.api.letsencrypt.org/directory"
+  server_url = var.lets_encrypt_env == "production" ? var.lets_encrypt_prd_url : var.lets_encrypt_stg_url
 }
 
 terraform {
