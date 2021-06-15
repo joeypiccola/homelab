@@ -48,3 +48,9 @@ variable "lets_encrypt_env" {
     error_message = "Valid values for var: lets_encrypt_env are (production, staging)."
   }
 }
+
+variable "sg_allowed_ports" {
+  description = "A list of ports allowed "
+  type    = list(number)
+  default = [80, 22, 443]
+}
