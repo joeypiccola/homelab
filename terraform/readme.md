@@ -23,3 +23,5 @@ All things terraform.
     - More info: [lets_encrypt configuration](https://github.com/joeypiccola/homelab/tree/master/terraform/lets_encrypt)
     - get cert ✅
     - importing to AWS ACM and output `arn` ✅
+  - **Objective**: WIP: Build a Terraform module to configure AWS IoT core to forward MQTT messages to an AWS Timestream database. Visualize data in Grafana.
+    - More info: [aws_iot_timestream configuration](https://github.com/joeypiccola/homelab/tree/master/terraform/aws_iot_timestream)
