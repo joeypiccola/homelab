@@ -32,7 +32,17 @@ Credit to [xordiv](https://github.com/xordiv) for [docker-alpine-cron](https://g
 1. build the image
 
 `docker build -t dynamicdns .`
+`docker build -t "dyndns_pwsh:7.1.3" -t "dyndns_pwsh:latest" .`
 
-2. use `docker-compose` to start it
+2. maybe get it up on the hub, get this in CI!
+
+```
+docker build -t "username/dyndns_pwsh:7.1.3" -t "username/dyndns_pwsh:latest" .
+cat ./docker_hub_pwd | docker login --username username --password-stdin
+docker push username/dyndns_pwsh:latest
+docker push username/dyndns_pwsh:7.1.3
+```
+
+3. use `docker-compose` to start it
 
 `docker-compose up -d`
