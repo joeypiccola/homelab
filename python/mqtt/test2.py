@@ -10,7 +10,7 @@ import paho.mqtt.client as mqtt
 # https://aws.amazon.com/blogs/iot/how-to-implement-mqtt-with-tls-client-authentication-on-port-443-from-client-devices-python/
 
 IoT_protocol_name = "x-amzn-mqtt-ca"
-aws_iot_endpoint = 'a2h6nqnfgvbo1g-ats.iot.us-east-1.amazonaws.com'
+aws_iot_endpoint = 'x.iot.us-east-1.amazonaws.com'
 url = "https://{}".format(aws_iot_endpoint)
 
 ca = '/Users/jpiccola/Documents/github/homelab/terraform/aws_iot_timestream/iot_cert/AmazonRootCA1.pem'
