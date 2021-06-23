@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/powershell:7.0.0-alpine-3.9
+FROM mcr.microsoft.com/powershell:alpine-3.12
 
 RUN apk update && apk add dcron ca-certificates && rm -rf /var/cache/apk/*
 
