@@ -17,3 +17,13 @@ resource "local_file" "private_key" {
     content     = aws_iot_certificate.cert.private_key
     filename = "${path.module}/iot_cert/private_key.pem"
 }
+
+resource "aws_iot_thing_principal_attachment" "att" {
+  principal = aws_iot_certificate.cert.arn
+  thing     = aws_iot_thing.example.name
+}
+
+# create the iot thing
+resource "aws_iot_thing" "example" {
+  name = "test_thing2"
+}

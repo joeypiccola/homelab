@@ -22,7 +22,7 @@ resource "aws_iot_policy" "pubsub" {
           "iot:Publish"
         ],
         "Resource" : [
-          "arn:aws:iot:us-east-1:152781741662:topic/dt/sensor/*"
+          "arn:aws:iot:us-east-1:152781741662:topic/home/sensors/*"
         ]
       }
     ]
