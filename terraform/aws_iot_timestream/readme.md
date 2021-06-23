@@ -1,6 +1,8 @@
 # aws_iot_timestream
 
-This module is a work in progress. Current functionally in `aws_iot_topic_rule` is not yet built, see [issue #19904](https://github.com/hashicorp/terraform-provider-aws/issues/19904).
+This module is a work in progress. Really, lots of resource defaults and other hard-coded values.
+
+Current functionally in `aws_iot_topic_rule` is not yet built, see [issue #19904](https://github.com/hashicorp/terraform-provider-aws/issues/19904).
 
 Use this module to create an AWS IoT Core MQTT topic that forwards messages to AWS Timestream.
 
