@@ -41,3 +41,52 @@ Example minimal JSON body.
   "token": "----"
 }
 ```
+
+Return:
+
+```json
+{
+  "coord": {
+    "lon": -104.9686,
+    "lat": 39.7074
+  },
+  "weather": [
+    {
+      "id": 803,
+      "main": "Clouds",
+      "description": "broken clouds",
+      "icon": "04n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 63.21,
+    "feels_like": 62.47,
+    "temp_min": 57.27,
+    "temp_max": 67.8,
+    "pressure": 1019,
+    "humidity": 69
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 1.01,
+    "deg": 77,
+    "gust": 4
+  },
+  "clouds": {
+    "all": 75
+  },
+  "dt": 1625028273,
+  "sys": {
+    "type": 2,
+    "id": 2004334,
+    "country": "US",
+    "sunrise": 1624966490,
+    "sunset": 1625020304
+  },
+  "timezone": -21600,
+  "id": 0,
+  "name": "Denver",
+  "cod": 200
+}
+```
