@@ -26,12 +26,12 @@ URL: owm-api:8080/owm
 
 Body Parameters.
 
-|property|description|optional|default|
+|property|description|required|default|
 |--------|-----------|--------|-------|
-|token|The [OpenWeatherMap API](https://openweathermap.org/api) token|`false`|-|
-|zip_code|zip code to query|`false`|-|
-|country|country code to query|`true`|`us`|
-|units|units of measurement. `standard`, `metric` and `imperial`|`true`|`imperial`|
+|token|The [OpenWeatherMap API](https://openweathermap.org/api) token|`true`|-|
+|zip_code|zip code to query|`true`|-|
+|country|country code to query|`false`|`us`|
+|units|units of measurement. `standard`, `metric` and `imperial`|`false`|`imperial`|
 
 Example minimal JSON body.
 
