@@ -34,4 +34,4 @@ api.add_resource(owm,'/owm')
 
 # run app only when called directly (e.g. python3 owm.py or gunicorn -args)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
