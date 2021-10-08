@@ -83,9 +83,13 @@ The public key `keys/id_rsa.pub` is in the repo but the private key `keys/id_rsa
 
 ## usage
 
-ping all hosts.
+list hosts.
 
-`ansible -i hosts all -m ping`
+`ansible all --list-hosts`
+
+ping all hosts with the `ping` module.
+
+`ansible switches -m ping`
 
 run `pb_colo` playbook.
 
