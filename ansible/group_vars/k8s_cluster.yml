@@ -1,0 +1,8 @@
+---
+ansible_user: kube_admin
+# https://docs.ansible.com/ansible/latest/reference_appendices/interpreter_discovery.html
+ansible_python_interpreter: auto
+apt_packages:
+  - curl
+  - htop
+  - nfs-common

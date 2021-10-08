@@ -59,3 +59,21 @@ raspbian:
     pizerosensor:
     colo:
     pidoorbell:
+
+
+k8s_controlplane:
+  hosts:
+    10.0.3.150:
+      hostname: node-ctrl-01
+
+k8s_worker:
+  hosts:
+    10.0.3.151:
+      hostname: node-work-01
+    10.0.3.152:
+      hostname: node-work-02
+
+k8s_cluster:
+  children:
+    k8s_worker:
+    k8s_controlplane:
