@@ -30,6 +30,7 @@
     path: "{{ backup_mount_path }}"
     state: directory
     owner: "{{ backup_user_name }}"
+  changed_when: false
 
 - name: Copy over AutoFS auto.luks
   become: true

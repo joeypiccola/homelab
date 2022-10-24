@@ -1,4 +1,4 @@
 .vault_pass
 *.retry
 galaxy_roles
-keys/id_rsa
+keys/id_rsa*

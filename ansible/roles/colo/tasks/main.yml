@@ -1,8 +1,10 @@
 ---
 
-- name: Install parted
+- name: Install packages
   apt:
-    pkg: parted
+    pkg:
+      - parted
+      - iperf3
     state: latest
 
 - name: Reboot to fix the things
