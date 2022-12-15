@@ -18,8 +18,12 @@
       - "switchport mode {{ item.mode }}"
       - "switchport access vlan {{ item.vlan }}"
   with_items:
-    - {interface: GigabitEthernet0/1, description: alley_camera, mode: access, vlan: 10}
-    - {interface: GigabitEthernet0/2, description: bench, mode: access, vlan: 3}
+    - {interface: GigabitEthernet0/1, description: bench-1, mode: access, vlan: 3}
+    - {interface: GigabitEthernet0/2, description: bench-2, mode: access, vlan: 3}
+    - {interface: GigabitEthernet0/3, description: bench-3, mode: access, vlan: 3}
+    - {interface: GigabitEthernet0/4, description: bench-4, mode: trunk}
+    - {interface: GigabitEthernet0/6, description: iscsi-a, mode: access, vlan: 202}
+    - {interface: GigabitEthernet0/7, description: iscsi-b, mode: access, vlan: 203}
 
 - name: configure ts-logan-0 <-> ss-logan-0 interface
   ios_config:
@@ -28,12 +32,3 @@
       - description <-> ss-logan-0
       - switchport mode trunk
       - switchport trunk native vlan 2
-
-- name: configure unifi-ap-lite interface
-  ios_config:
-    parents: interface GigabitEthernet0/3
-    lines:
-      - description unifi-ap-lite
-      - switchport mode trunk
-      - switchport trunk native vlan 2
-      - switchport trunk allowed vlan 1-3,8-10

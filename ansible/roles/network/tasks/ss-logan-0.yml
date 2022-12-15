@@ -1,32 +1,31 @@
 ---
 
-- name: configure vtp
-  ios_config:
-    lines:
-      - vtp mode client
-      - "vtp domain {{ vtp_domain }}"
-      - "vtp password {{ vtp_password }}"
-      - vtp pruning
-      - "vtp version {{ vtp_version }}"
-  changed_when: false
-
 - name: configure general interfaces
-  ios_config:
+  cisco.ios.ios_config:
     parents: "interface {{ item.interface }}"
     lines:
       - "description {{ item.description }}"
       - "switchport mode {{ item.mode }}"
       - "switchport access vlan {{ item.vlan }}"
   with_items:
-    - {interface: GigabitEthernet1/0/1, description: south_yard camera, mode: access, vlan: 10}
-    - {interface: GigabitEthernet1/0/2, description: backyard camera, mode: access, vlan: 10}
-    - {interface: GigabitEthernet1/0/3, description: front_porch camera, mode: access, vlan: 10}
-    - {interface: GigabitEthernet1/0/4, description: printer, mode: access, vlan: 3}
-    - {interface: GigabitEthernet1/0/5, description: office-a, mode: access, vlan: 3}
-    - {interface: GigabitEthernet1/0/10, description: mech-room-lab, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/1, description: open, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/2, description: open, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/3, description: open, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/4, description: open, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/5, description: open, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/9, description: zigbee_poe_coordinator, mode: access, vlan: 9}
+    - {interface: GigabitEthernet1/0/10, description: open, mode: access, vlan: 3}
+
+- name: configure ss-logan-0 <-> ts-logan-0 interface
+  cisco.ios.ios_config:
+    parents: interface GigabitEthernet1/0/6
+    lines:
+      - description <-> ts-logan-1 (garage)
+      - switchport mode trunk
+      - switchport trunk native vlan 2
 
 - name: configure unifi-ap-pro interface
-  ios_config:
+  cisco.ios.ios_config:
     parents: interface GigabitEthernet1/0/7
     lines:
       - description unifi-ap-pro
@@ -35,31 +34,15 @@
       - switchport trunk allowed vlan 1-3,8-10
 
 - name: configure century_link_ont interface
-  ios_config:
+  cisco.ios.ios_config:
     parents: interface GigabitEthernet1/0/8
     lines:
       - description century_link_ont
       - switchport mode trunk
       - switchport trunk allowed vlan 201
 
-- name: configure ss-logan-0 <-> ts-logan-0 interface
-  ios_config:
-    parents: interface GigabitEthernet1/0/9
-    lines:
-      - description <-> ts-logan-0 (garage)
-      - switchport mode trunk
-      - switchport trunk native vlan 2
-
-- name: configure ss-logan-0 <-> ts-logan-1 interface
-  ios_config:
-    parents: interface GigabitEthernet1/0/6
-    lines:
-      - description <-> ts-logan-1 (office-b)
-      - switchport mode trunk
-      - switchport trunk native vlan 2
-
 - name: configure ss-logan-0 <-> cs-logan-0 interface
-  ios_config:
+  cisco.ios.ios_config:
     parents: interface GigabitEthernet1/0/24
     lines:
       - description <-> cs-logan-0

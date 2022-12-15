@@ -1,6 +1,6 @@
 ---
 # ansible_ssh_private_key_file must be present at this level so that ansible_network_os ios won't try ssh with keys further up
 ansible_ssh_private_key_file:
-ansible_connection: network_cli
+# ansible_connection: network_cli
 ansible_become: yes
 ansible_become_method: enable

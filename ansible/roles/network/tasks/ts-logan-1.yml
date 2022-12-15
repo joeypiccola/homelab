@@ -1,17 +1,7 @@
 ---
 
-- name: configure vtp
-  ios_config:
-    lines:
-      - vtp mode client
-      - "vtp domain {{ vtp_domain }}"
-      - "vtp password {{ vtp_password }}"
-      - vtp pruning
-      - "vtp version {{ vtp_version }}"
-  changed_when: false
-
 - name: configure general interfaces
-  ios_config:
+  cisco.ios.ios_config:
     parents: "interface {{ item.interface }}"
     lines:
       - "description {{ item.description }}"
@@ -20,10 +10,14 @@
   with_items:
     - {interface: FastEthernet0/1, description: alley_camera, mode: access, vlan: 10}
     - {interface: FastEthernet0/2, description: garage_camera, mode: access, vlan: 10}
-    - {interface: FastEthernet0/4, description: bench, mode: access, vlan: 3}
+    - {interface: FastEthernet0/4, description: backyard_camera, mode: access, vlan: 10}
+    - {interface: FastEthernet0/5, description: bench, mode: access, vlan: 3}
+    - {interface: FastEthernet0/6, description: open, mode: access, vlan: 9}
+    - {interface: FastEthernet0/7, description: open, mode: access, vlan: 9}
+    - {interface: FastEthernet0/8, description: open, mode: access, vlan: 9}
 
 - name: configure ts-logan-1 <-> ss-logan-0 interface
-  ios_config:
+  cisco.ios.ios_config:
     parents: interface GigabitEthernet0/1
     lines:
       - description <-> ss-logan-0
@@ -32,10 +26,10 @@
       - switchport trunk native vlan 2
 
 - name: configure unifi-ap-lite interface
-  ios_config:
+  cisco.ios.ios_config:
     parents: interface FastEthernet0/3
     lines:
-      - description unifi-ap-lite
+      - description unifi_ap_sh runlite
       - switchport trunk encapsulation dot1q
       - switchport mode trunk
       - switchport trunk native vlan 2

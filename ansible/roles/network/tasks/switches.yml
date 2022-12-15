@@ -1,12 +1,22 @@
 ---
 
 - name: configure host naming
-  ios_system:
+  cisco.ios.ios_system:
     hostname: "{{ hostvars[inventory_hostname].hostname }}"
     domain_name: "{{ domain_dns_name }}"
 
+- name: configure vtp
+  cisco.ios.ios_config:
+    lines:
+      - "vtp mode {{ hostvars[inventory_hostname].vtp_mode }}"
+      - "vtp domain {{ vtp_domain }}"
+      - "vtp password {{ vtp_password }}"
+      - vtp pruning
+      - "vtp version {{ vtp_version }}"
+  changed_when: false
+
 - name: service config
-  ios_config:
+  cisco.ios.ios_config:
     lines:
       - no service pad
       - service timestamps debug uptime
@@ -14,33 +24,33 @@
       - service password-encryption
 
 - name: configure jumbo frames
-  ios_config:
+  cisco.ios.ios_config:
     lines:
       - system mtu jumbo 9000
   changed_when: false
 
 - name: configure timezone
-  ios_config:
+  cisco.ios.ios_config:
     lines:
       - clock timezone MST -7 0
   changed_when: false
 
 - name: config ntp
-  ios_ntp:
+  cisco.ios.ios_ntp:
     server: "{{ item }}"
     state: present
   loop: "{{ ntp_servers }}"
   changed_when: false
 
 - name: configure snmp-server
-  ios_config:
+  cisco.ios.ios_config:
     lines:
       - snmp-server community public RO
       - snmp-server location basement
       - snmp-server contact joey
 
 - name: configure name servers
-  ios_system:
+  cisco.ios.ios_system:
     name_servers:
       - "{{ name_servers[0] }}"
       - "{{ name_servers[1] }}"
@@ -54,6 +64,6 @@
   when: hostname is defined
 
 - name: save running to startup when modified
-  ios_config:
+  cisco.ios.ios_config:
     save_when: modified
   changed_when: false

@@ -1,6 +1,6 @@
 ---
 - hosts:
-    - routers
+    # - routers
     - switches
   become: true
   roles:
