@@ -18,12 +18,16 @@
 
 - name: Include openVPN tasks
   include_tasks: openvpn.yml
+  tags: always
 
 - name: Include telegraf tasks
   include_tasks: telegraf.yml
+  tags: always
 
 - name: Include account tasks
   include_tasks: accounts.yml
+  tags: always
 
 - name: Include backup tasks
   include_tasks: backup.yml
+  tags: always

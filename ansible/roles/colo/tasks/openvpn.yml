@@ -1,11 +1,13 @@
 ---
 
 - name: Install OpenVPN package
+  tags: openvpn
   apt:
     pkg: openvpn
     state: latest
 
 - name: Enable OpenVPN service
+  tags: openvpn
   become: true
   systemd:
     name: openvpn@client.service
@@ -13,6 +15,7 @@
     state: started
 
 - name: Copy over OpenVPN config
+  tags: openvpn
   become: true
   template:
     src: "{{ role_path }}/files/joey_colo.conf"
