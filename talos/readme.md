@@ -12,6 +12,8 @@ talosctl version
 
 ### plan out ips
 
+this is just for a three node (control plane only) cluster
+
 | use | ip                                                    |
 |-----|-------------------------------------------------------|
 | cp0 | tbd, for now you'll get this when the system comes up |
@@ -162,10 +164,9 @@ talos-vmtoolsd-slrdd                    0/1     ContainerCreating   0           
 
 ### leverage `kubectl` to apply the vmtoolsd-secret.yaml manifest
 
-note, deployed to `kube-system` namespace named `talos-vmtoolsd-config` with key data `talosconfig`
+note, deployed to `kube-system` namespace named `talos-vmtoolsd-config` with data key `talosconfig`
 
 `kubectl -n kube-system create secret generic talos-vmtoolsd-config --from-file=talosconfig=./vmtoolsd-secret.yaml`
-cp.patch.yaml
 
 ### watch the pods
 
@@ -178,7 +179,7 @@ Documents/projects/talos took 6s
 
 ### the secret
 
-get the secret and decode it, note the data key is `talosconfig`. the secret should be the exact contents of `mtoolsd-secret.yaml`.
+get the secret and decode it, note the data key is `talosconfig`. the secret should be the exact contents of `vmtoolsd-secret.yaml`.
 
 ```
 ➜ k get secret talos-vmtoolsd-config -o yaml
