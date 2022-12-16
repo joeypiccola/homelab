@@ -79,7 +79,7 @@ contexts:
 
 ### set env var for talosconfig
 
-this prevents having to specify `--talosconfig` in `talosctl --talosconfig=./talosconfig` each time
+this prevents having to specify `--talosconfig` in `talosctl --talosconfig=./talosconfig` each time. consider using `direnv` and stashing this in a `.envrc` file.
 
 `export TALOSCONFIG=./talosconfig`
 
