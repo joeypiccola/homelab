@@ -1,24 +1,24 @@
 ---
 
 - name: Manage ansible user
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set system login user ansible authentication plaintext-password {{ ansible_password }}
       - set system login user ansible level admin
   changed_when: false
 
 - name: Set hostname
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set system host-name {{ hostvars[inventory_hostname].hostname }}
 
 - name: Config ntp
-  edgeos_config:
+  community.network.edgeos_config:
     lines: set system ntp server {{ item }}
   loop: "{{ ntp_servers }}"
 
 - name: Set timezone
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set system time-zone {{ timezone }}
 
@@ -27,6 +27,6 @@
   when: hostname is defined
 
 - name: Save config
-  edgeos_config:
+  community.network.edgeos_config:
     save: true
   changed_when: false

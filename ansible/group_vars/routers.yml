@@ -1,6 +1,7 @@
 ---
 ansible_user: ansible
 ansible_network_os: edgeos
+ansible_connection: network_cli
 network_layer: 3
 ansible_password: !vault |
   $ANSIBLE_VAULT;1.1;AES256

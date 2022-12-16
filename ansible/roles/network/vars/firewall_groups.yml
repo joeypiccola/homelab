@@ -1,13 +1,6 @@
 ---
 
 firewall_groups:
-  - name: GitHub_WebHooks
-    type: network
-    description: github servers that send webhooks
-    elements:
-      - 140.82.112.0/20
-      - 185.199.108.0/22
-      - 92.30.252.0/22
   - name: RTSP
     type: port
     description: rtsp port
@@ -28,3 +21,8 @@ firewall_groups:
     description: RFC1918-ten
     elements:
       - 10.0.0.0/8
+  - name: guest_net
+    type: address
+    description: guest network
+    elements:
+      - 192.168.8.0/24

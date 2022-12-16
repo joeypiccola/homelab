@@ -1,7 +1,7 @@
 ---
 
 - name: configure general vlans
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set interfaces ethernet {{ item.l3_interface }} vif {{ item.vlan_id }} address {{ item.l3_ip }}/{{ item.network_mask }}
       - set interfaces ethernet {{ item.l3_interface }} vif {{ item.vlan_id }} description {{ item.name }}
@@ -10,7 +10,7 @@
   when: item.l3_ip is defined
 
 - name: configure century link vlan
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set interfaces ethernet {{ item.l3_interface }} vif {{ item.vlan_id }} address dhcp
       - set interfaces ethernet {{ item.l3_interface }} vif {{ item.vlan_id }} description {{ item.name }}
@@ -23,9 +23,10 @@
     file: firewall_groups.yml
 
 - name: configure firewall groups
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set firewall group {{ item.0.type }}-group {{ item.0.name }} {{ item.0.type }} {{ item.1 }}
+      # - set firewall group {{ item.0.type }}-group {{ item.0.name }} description {{ item.0.description }}
   with_subelements:
     - "{{ firewall_groups }}"
     - elements
@@ -37,7 +38,7 @@
   include_tasks: tasks/firewall/nat.yml
 
 - name: configure eth0.201 (century link pppoe)
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set interfaces ethernet eth0 vif 201 pppoe 0 default-route auto
       - set interfaces ethernet eth0 vif 201 pppoe 0 mtu 1492
@@ -46,7 +47,7 @@
       - set interfaces ethernet eth0 vif 201 pppoe 0 user-id {{ cl_username }}
 
 - name: set firewall system options
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set firewall options mss-clamp interface-type pppoe
       - set firewall options mss-clamp mss 1452
@@ -56,18 +57,18 @@
       - set firewall syn-cookies enable
 
 - name: set OpenVPN static route
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
-      - set protocols static route 10.0.60.0/24 next-hop 10.0.3.59
+      - set protocols static route 10.0.60.0/24 next-hop 10.0.3.65
 
 - name: set dhcp-relay servers
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set service dhcp-relay server {{ item }}
   loop: "{{ dhcp_servers }}"
 
 - name: set hardware offloading options
-  edgeos_config:
+  community.network.edgeos_config:
     lines:
       - set system offload ipv4 forwarding enable
       - set system offload ipv4 pppoe enable
@@ -76,7 +77,19 @@
       - set system offload ipv4 table-size 32768
 
 - name: set dhcp-relay interfaces
-  edgeos_config:
+  community.network.edgeos_config:
     lines: set service dhcp-relay interface {{ item.l3_interface }}.{{ item.vlan_id }}
   loop: "{{ vlans }}"
   when: item.dhcp|default(false)|bool
+
+- name: set mdns repeater
+  community.network.edgeos_config:
+    lines:
+      - set service mdns repeater interface eth1.9
+      - set service mdns repeater interface eth1.3
+      - set service mdns repeater interface eth1
+
+- name: set snmp repeater
+  community.network.edgeos_config:
+    lines:
+      - set service snmp community {{ snmp_ro_string }} authorization ro
