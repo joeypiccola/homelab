@@ -1,5 +1,27 @@
 # talos
 
+- [talos](#talos)
+  - [install ctl](#install-ctl)
+  - [ipam and dns](#ipam-and-dns)
+    - [plan out ips](#plan-out-ips)
+    - [create a dns record for `talos.piccola.us` that points to your VIP](#create-a-dns-record-for-talospiccolaus-that-points-to-your-vip)
+  - [talos config and cluster bootstrapping](#talos-config-and-cluster-bootstrapping)
+    - [generate secrets](#generate-secrets)
+    - [get control plane patch](#get-control-plane-patch)
+      - [update the VIP in the `cp.patch.yaml` file](#update-the-vip-in-the-cppatchyaml-file)
+    - [generate config](#generate-config)
+    - [update talosconfig's nodes and endpoints](#update-talosconfigs-nodes-and-endpoints)
+    - [set env var for talosconfig](#set-env-var-for-talosconfig)
+    - [apply config to each node (ips retrieved when the systems came up)](#apply-config-to-each-node-ips-retrieved-when-the-systems-came-up)
+    - [bootstrap the first node (you do this once on a single node)](#bootstrap-the-first-node-you-do-this-once-on-a-single-node)
+    - [merge kubeconfig with ~/.kube/config](#merge-kubeconfig-with-kubeconfig)
+    - [run some commands](#run-some-commands)
+  - [vnware tools](#vnware-tools)
+    - [leverage `talosctl` to create a new config with the role `os:admin`](#leverage-talosctl-to-create-a-new-config-with-the-role-osadmin)
+    - [leverage `kubectl` to apply the vmtoolsd-secret.yaml manifest](#leverage-kubectl-to-apply-the-vmtoolsd-secretyaml-manifest)
+    - [watch the pods](#watch-the-pods)
+    - [the secret](#the-secret)
+
 ## install ctl
 
 ```bash
@@ -38,10 +60,6 @@ Address: 10.0.3.150
 
 `talosctl gen secrets -o secrets.yaml`
 
-### generate config
-
-`talosctl gen config --with-secrets secrets.yaml talos https://talos.piccola.us:6443 --config-patch-control-plane @cp.patch.yaml`
-
 ### get control plane patch
 
 this is what is leveraged to get vmware tools installed
@@ -56,6 +74,10 @@ this is also setting DHCP
 vip:
   ip: 10.0.3.150
 ```
+
+### generate config
+
+`talosctl gen config --with-secrets secrets.yaml talos https://talos.piccola.us:6443 --config-patch-control-plane @cp.patch.yaml`
 
 ### update talosconfig's nodes and endpoints
 
