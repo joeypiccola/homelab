@@ -10,7 +10,7 @@
     - [get control plane patch](#get-control-plane-patch)
       - [update the VIP in the `cp.patch.yaml` file](#update-the-vip-in-the-cppatchyaml-file)
     - [generate config](#generate-config)
-    - [update talosconfig's nodes and endpoints](#update-talosconfigs-nodes-and-endpoints)
+    - [update talosconfig's nodes and endpoints if needed](#update-talosconfigs-nodes-and-endpoints-if-needed)
     - [set env var for talosconfig](#set-env-var-for-talosconfig)
     - [apply config to each node (ips retrieved when the systems came up)](#apply-config-to-each-node-ips-retrieved-when-the-systems-came-up)
     - [bootstrap the first node (you do this once on a single node)](#bootstrap-the-first-node-you-do-this-once-on-a-single-node)
@@ -21,6 +21,8 @@
     - [leverage `kubectl` to apply the vmtoolsd-secret.yaml manifest](#leverage-kubectl-to-apply-the-vmtoolsd-secretyaml-manifest)
     - [watch the pods](#watch-the-pods)
     - [the secret](#the-secret)
+  - [talhelper](#talhelper)
+    - [install](#install)
 
 ## install ctl
 
@@ -79,7 +81,7 @@ vip:
 
 `talosctl gen config --with-secrets secrets.yaml talos https://talos.piccola.us:6443 --config-patch-control-plane @cp.patch.yaml`
 
-### update talosconfig's nodes and endpoints
+### update talosconfig's nodes and endpoints if needed
 
 get the nodes' ips from console
 
@@ -88,15 +90,12 @@ context: talos
 contexts:
     talos:
         endpoints:
-            - 10.0.3.150
-        nodes:
             - 10.0.3.51
             - 10.0.3.110
             - 10.0.3.112
         ca: "< removed >"
         crt: "< removed >"
         key: "< removed >"
-
 ```
 
 ### set env var for talosconfig
@@ -117,9 +116,13 @@ talosctl apply-config --insecure --nodes 10.0.3.112 --file controlplane.yaml
 
 ### bootstrap the first node (you do this once on a single node)
 
-this takes some time, the cluster slowly reconciles itself
+this takes some time, the cluster slowly reconciles itself.
 
 `talosctl bootstrap --nodes 10.0.3.51`
+
+from the docs 👇
+
+> Since VIP functionality relies on etcd for elections, the shared IP will not come alive until after you have bootstrapped Kubernetes. This does mean that you cannot use the shared IP when issuing the talosctl bootstrap command (although, as noted above, it is not recommended to access the Talos API via the VIP). Instead, the bootstrap command will need to target one of the controlplane nodes directly.
 
 ### merge kubeconfig with ~/.kube/config
 
@@ -213,3 +216,9 @@ data:
 ```
 echo 'Y29udGV4dDogYWRtaW5AdGFs..............' | base64 --decode
 ```
+
+## talhelper
+
+### install
+
+`curl https://i.jpillora.com/budimanjojo/talhelper\! | sudo bash`
