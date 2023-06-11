@@ -87,7 +87,6 @@
     lines:
       - set service mdns repeater interface eth1.9
       - set service mdns repeater interface eth1.3
-      - set service mdns repeater interface eth1
 
 - name: set snmp repeater
   community.network.edgeos_config:
