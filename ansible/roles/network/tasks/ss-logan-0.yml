@@ -8,11 +8,11 @@
       - "switchport mode {{ item.mode }}"
       - "switchport access vlan {{ item.vlan }}"
   with_items:
-    - {interface: GigabitEthernet1/0/1, description: open, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/1, description: caseta_hub, mode: access, vlan: 9}
     - {interface: GigabitEthernet1/0/2, description: open, mode: access, vlan: 3}
     - {interface: GigabitEthernet1/0/3, description: open, mode: access, vlan: 3}
     - {interface: GigabitEthernet1/0/4, description: open, mode: access, vlan: 3}
-    - {interface: GigabitEthernet1/0/5, description: open, mode: access, vlan: 3}
+    - {interface: GigabitEthernet1/0/5, description: poecam_test, mode: access, vlan: 10}
     - {interface: GigabitEthernet1/0/9, description: zigbee_poe_coordinator, mode: access, vlan: 9}
     - {interface: GigabitEthernet1/0/10, description: open, mode: access, vlan: 3}
 
