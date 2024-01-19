@@ -14,15 +14,22 @@ switches:
       hostname: ss-logan-0
       vtp_mode: client
     10.0.2.5:
-      hostname: ts-logan-1
+      hostname: ts-logan-1 # garage
       vtp_mode: client
-    # 10.0.2.6:
-    #   hostname: ts-logan-0
+    10.0.2.6:
+      hostname: ts-logan-0 # office
+      vtp_mode: client
 
 colo:
   hosts:
-    10.0.60.10:
+    raspi-colo:
       hostname: colo
+      # ansible_ssh_port: 5639
+
+raspi-home:
+  hosts:
+    10.0.3.108:
+      hostname: raspi-home
 
 network:
   children:
@@ -36,3 +43,4 @@ debian:
 raspbian:
   children:
     colo:
+    raspi-home:

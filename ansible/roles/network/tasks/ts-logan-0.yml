@@ -21,9 +21,10 @@
     - {interface: GigabitEthernet0/1, description: bench-1, mode: access, vlan: 3}
     - {interface: GigabitEthernet0/2, description: bench-2, mode: access, vlan: 3}
     - {interface: GigabitEthernet0/3, description: bench-3, mode: access, vlan: 3}
-    - {interface: GigabitEthernet0/4, description: bench-4, mode: trunk}
-    - {interface: GigabitEthernet0/6, description: iscsi-a, mode: access, vlan: 202}
-    - {interface: GigabitEthernet0/7, description: iscsi-b, mode: access, vlan: 203}
+    - {interface: GigabitEthernet0/4, description: bench-4, mode: access, vlan: 3}
+    - {interface: GigabitEthernet0/5, description: bench-5, mode: access, vlan: 3}
+    - {interface: GigabitEthernet0/6, description: bench-6, mode: access, vlan: 9}
+    - {interface: GigabitEthernet0/7, description: bench-7, mode: access, vlan: 10}
 
 - name: configure ts-logan-0 <-> ss-logan-0 interface
   ios_config:
