@@ -1,0 +1,41 @@
+---
+
+- name: Import InfluxData GPG signing key for InfluxData repository
+  ansible.builtin.apt_key:
+    url: https://repos.influxdata.com/influxdata-archive_compat.key
+    state: present
+
+- name: Add InfluxData repository for telegraf packages
+  ansible.builtin.apt_repository:
+    repo: deb https://repos.influxdata.com/debian {{ ansible_lsb.codename }} stable
+    state: present
+
+- name: Install telegraf packages
+  ansible.builtin.package:
+    name: telegraf
+    state: latest
+
+- name: Set telegraf user groups
+  ansible.builtin.user:
+    name: jatelegrafmes
+    shell: /bin/bash
+    groups: video,i2c,telegraf
+
+- name: Copy over telegraf.conf
+  template:
+    src: "{{ role_path }}/files/telegraf.conf"
+    dest: /etc/telegraf/telegraf.conf
+  register: telegrafconf
+
+- name: Restart telegraf
+  service:
+    name: telegraf
+    state: restarted
+  when: telegrafconf.changed
+
+- name: Ensure Telegraf is running and set to start
+  tags: telegraf
+  service:
+    name: telegraf
+    state: started
+    enabled: yes

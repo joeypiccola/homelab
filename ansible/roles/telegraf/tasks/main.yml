@@ -1,0 +1,5 @@
+---
+
+- name: Include telegraf tasks
+  include_tasks: telegraf.yml
+  tags: always
