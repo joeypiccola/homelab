@@ -1,0 +1,25 @@
+---
+
+- name: Install packages
+  apt:
+    pkg:
+      - parted
+      - bmon
+    state: latest
+
+- name: Reboot to fix the things
+  cron:
+    name: "Schedule reboot to fix things bc i am lazy"
+    hour: "9"
+    minute: "0"
+    weekday: "0,3"
+    job: "/sbin/shutdown -r"
+    state: present
+
+- name: Include account tasks
+  include_tasks: accounts.yml
+  tags: always
+
+- name: Include backup tasks
+  include_tasks: backup.yml
+  tags: always

@@ -1,0 +1,14 @@
+#!/bin/bash
+# via: https://gist.github.com/daks/a7834169fc1a483b85bc
+
+device=$1
+device_crypt=${device}_autocrypt
+
+CRYPTSETUP=/sbin/cryptsetup
+
+mountopts="-fstype=ext4,defaults,noatime,nodiratime"
+
+# map the LUKS device, if not already done
+$CRYPTSETUP luksOpen /dev/${device} ${device_crypt} -d=/etc/.keys/${device}.key 2>/dev/null
+
+echo $mountopts :/dev/mapper/${device_crypt}

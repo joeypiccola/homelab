@@ -1,0 +1,63 @@
+---
+
+- name: Install CryptSetup package
+  apt:
+    pkg: cryptsetup
+    state: latest
+
+- name: Install AutoFS package
+  apt:
+    pkg: autofs
+    state: latest
+
+- name: Create LUKS key dir
+  file:
+    path: /etc/.keys
+    state: directory
+    owner: root
+    mode: 0400
+
+- name: Copy over LUKS key file
+  become: true
+  template:
+    src: "{{ role_path }}/files/sda1.key"
+    dest: /etc/.keys/sda1.key
+    owner: root
+    mode: 0400
+
+- name: Create colo_backup mount dir
+  file:
+    path: "{{ backup_mount_path }}"
+    state: directory
+    owner: "{{ backup_user_name }}"
+  changed_when: false
+
+- name: Copy over AutoFS auto.luks
+  become: true
+  template:
+    src: "{{ role_path }}/files/auto.luks"
+    dest: /etc/auto.luks
+    owner: root
+    mode: 0755
+
+- name: Copy over AutoFS auto.master
+  become: true
+  template:
+    src: "{{ role_path }}/files/auto.master"
+    dest: /etc/auto.master
+    owner: root
+    mode: 0644
+
+- name: Copy over cron LUKS unmount script
+  become: true
+  template:
+    src: "{{ role_path }}/files/auto_umap_luks.sh"
+    dest: /etc/auto_umap_luks.sh
+    owner: root
+    mode: 0755
+
+- name: Create cron to unmount LUKS if not in use
+  cron:
+    name: "unmount LUKS if not in use"
+    minute: "30"
+    job: "/etc/auto_umap_luks.sh"
