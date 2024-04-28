@@ -1,0 +1,7 @@
+---
+
+apt_packages:
+  - htop
+  - nmap
+  - iperf3
+  - git

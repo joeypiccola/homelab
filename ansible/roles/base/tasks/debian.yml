@@ -1,5 +1,15 @@
 ---
 
+- name: Load a variable file based on the OS type, or a default if not found. Using free-form to specify the file.
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ansible_os_family}}.yml'
+        - default.yml
+      paths:
+        - vars
+
 - name: Update apt
   apt:
     update_cache: yes
@@ -18,7 +28,7 @@
   user:
     name: "{{ personal_user }}"
     groups:
-     - sudo
+      - sudo
 
 - name: Add personal user authorized key
   authorized_key:
@@ -27,7 +37,7 @@
 
 - name: Setup passwordless sudo for personal user
   lineinfile:
-    path: /etc/sudoers.d/"{{ personal_user }}"
+    path: "/etc/sudoers.d/{{ personal_user }}"
     line: '{{ personal_user }} ALL=(ALL:ALL) NOPASSWD:ALL'
     state: present
     mode: 0440
@@ -39,5 +49,5 @@
   become: true
   apt:
     force_apt_get: true
-    pkg: "{{ apt_packages }}"
+    pkg: "{{ apt_packages}}"
     state: present
