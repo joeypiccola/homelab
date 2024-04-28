@@ -1,0 +1,5 @@
+---
+
+- name: Include tailscale tasks
+  include_tasks: tailscale.yml
+  tags: [tailscale]
