@@ -1,5 +1,0 @@
----
-ruby_install_gems:
-  - hiera-eyaml
-  - colorls
-  - rubocop

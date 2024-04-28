@@ -1,3 +1,0 @@
-+dir:/etc/auto.master.d
-+auto.master
-{{ backup_mount_path }} /etc/auto.luks --timeout=600

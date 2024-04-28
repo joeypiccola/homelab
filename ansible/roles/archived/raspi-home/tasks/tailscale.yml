@@ -1,0 +1,21 @@
+---
+
+- name: ipv4.ip_forward
+  ansible.builtin.command: echo 'net.ipv4.ip_forward = 1' | tee -a /etc/sysctl.conf
+  become: true
+
+- name: ipv6.ip_forward
+  ansible.builtin.command: echo 'net.ipv6.conf.all.forwarding = 1' | tee -a /etc/sysctl.conf
+  become: true
+
+- name: load sysctl.conf
+  ansible.builtin.command: sysctl -p /etc/sysctl.conf
+  become: true
+
+- name: Configure Tailscale
+  include_role:
+    name: galaxy_roles/artis3n.tailscale
+  vars:
+    tailscale_args: "--hostname=raspi5-home --accept-routes --advertise-exit-node --advertise-routes=10.0.3.0/24"
+    tailscale_authkey: "tskey-auth-kinGoS6CNTRL-iSafE5r6wUc7VcG1iLbJVcUhZVNYFRjB"
+    insecurely_log_authkey: true
