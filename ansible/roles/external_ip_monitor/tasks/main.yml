@@ -1,0 +1,5 @@
+---
+
+- name: Include ip_check tasks
+  include_tasks: ip_check.yml
+  tags: always

@@ -1,0 +1,37 @@
+---
+
+- name: Install apt packages
+  tags: packages
+  become: true
+  ansible.builtin.apt:
+    force_apt_get: true
+    pkg:
+      - python3-pip
+      - python3-venv
+      - python3-virtualenv
+    state: present
+
+- name: Install pip3 packages
+  become: true
+  ansible.builtin.pip:
+    name:
+      - requests
+    virtualenv: "{{ python_venv_path }}"
+    virtualenv_command: python3 -m venv
+    state: present
+
+- name: Copy over python script
+  become: true
+  # tags: python
+  template:
+    src: "{{ role_path }}/files/ip_check.py"
+    dest: "{{ python_venv_path }}/ip_check.py"
+    owner: root
+    mode: 0755
+
+- name: Schedule cron job
+  become: true
+  cron:
+    name: Run IP check script
+    minute: "*/10"
+    job: "{{ python_venv_path }}/bin/python3 {{ python_venv_path }}/ip_check.py"
