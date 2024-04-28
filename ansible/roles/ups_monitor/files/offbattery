@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# managed with ansible
+
+#
+# This shell script if placed in /etc/apcupsd
+# will be called by /etc/apcupsd/apccontrol when the
+# UPS goes back on to the mains after a power failure.
+# We send an email message to root to notify him.
+#
+
+HOSTNAME=`hostname`
+MSG="$HOSTNAME UPS $1 Power has returned"
+#
+(
+   echo "$MSG"
+   echo " "
+   /sbin/apcaccess status
+) | $APCUPSD_MAIL -s "$MSG" $SYSADMIN
+
+{{ python_venv_path }}/bin/python3 /etc/apcupsd/ups3.py "UPS Power Restored"
+
+exit 0

@@ -1,0 +1,81 @@
+---
+
+- name: Install apt packages
+  tags: packages
+  become: true
+  ansible.builtin.apt:
+    force_apt_get: true
+    pkg:
+      - apcupsd
+      - python3-pip
+      - python3-venv
+      - python3-virtualenv
+    state: present
+
+- name: Install pip3 packages
+  become: true
+  ansible.builtin.pip:
+    name:
+      - requests
+    virtualenv: "{{ python_venv_path }}"
+    virtualenv_command: python3 -m venv
+    state: present
+
+- name: Copy over python script
+  become: true
+  # tags: python
+  template:
+    src: "{{ role_path }}/files/ups3.py"
+    dest: /etc/apcupsd/ups3.py
+    owner: root
+    mode: 0755
+
+- name: Copy over onbattery script
+  become: true
+  # tags: python
+  template:
+    src: "{{ role_path }}/files/onbattery"
+    dest: /etc/apcupsd/onbattery
+    owner: root
+    mode: 0755
+
+- name: Copy over offbattery script
+  become: true
+  # tags: python
+  template:
+    src: "{{ role_path }}/files/offbattery"
+    dest: /etc/apcupsd/offbattery
+    owner: root
+    mode: 0755
+
+- name: Copy over apcupsd
+  become: true
+  # tags: python
+  template:
+    src: "{{ role_path }}/files/apcupsd"
+    dest: /etc/default/
+    owner: root
+    mode: 0644
+
+- name: Copy over apcupsd.conf
+  become: true
+  # tags: python
+  template:
+    src: "{{ role_path }}/files/apcupsd.conf"
+    dest: /etc/apcupsd/apcupsd.conf
+    owner: root
+    mode: 0644
+  register: apcupsdconf
+
+- name: Restart apcupsd
+  service:
+    name: telegraf
+    state: restarted
+  when: apcupsdconf.changed
+
+- name: Ensure apcupsd is running and set to start
+  tags: apcupsd
+  service:
+    name: apcupsd
+    state: started
+    enabled: yes

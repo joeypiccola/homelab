@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# managed with ansible
+
+#
+# This shell script if placed in /etc/apcupsd
+# will be called by /etc/apcupsd/apccontrol when the UPS
+# goes on batteries.
+# We send an email message to root to notify him.
+#
+
+HOSTNAME=`hostname`
+MSG="$HOSTNAME UPS $1 Power Failure !!!"
+#
+(
+   echo "$MSG"
+   echo " "
+   /sbin/apcaccess status
+) | $APCUPSD_MAIL -s "$MSG" $SYSADMIN
+
+{{ python_venv_path }}/bin/python3 /etc/apcupsd/ups3.py "UPS Power Lost"
+
+exit 0

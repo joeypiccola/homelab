@@ -1,0 +1,5 @@
+---
+
+- name: Include ups_monitor tasks
+  include_tasks: ups_monitor.yml
+  tags: always
