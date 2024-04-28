@@ -1,0 +1,22 @@
+module "k8s_vsphere" {
+  source                       = "./modules/k8s_vsphere"
+  vsphere_server               = "vcenter.ad.piccola.us"
+  vsphere_allow_unverified_ssl = true
+  vsphere_cluster              = "BC1"
+  vsphere_datacenter           = "Basement"
+  vsphere_portgroup            = "VLAN3_primary_LAN"
+  vsphere_datastore            = "samsung-970-evo-plus"
+  vsphere_folder               = ""
+  vsphere_user                 = ""
+  vsphere_password             = ""
+  vsphere_template             = "ubuntu18-packer"
+  controlplane_count           = 1
+  worker_count                 = 2
+  cluster_subnet               = "10.0.3.0"
+  cluster_gateway              = "10.0.3.1"
+  cluster_netmask              = 24
+  cluster_start_address        = 150
+  dns_servers                  = ["10.0.3.24"]
+  domain                       = "piccola.us"
+  controlplane_memory          = 4096
+}
