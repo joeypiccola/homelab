@@ -1,4 +1,2 @@
 ---
-# from galaxy
-# - src: gantsign.oh-my-zsh
-# - src: geerlingguy.ruby
+- src: artis3n.tailscale

@@ -1,0 +1,9 @@
+---
+- hosts: pi_colo
+  become: true
+  roles:
+    - role: base
+    - role: tailscale
+    - role: telegraf
+    - role: remote_file_backup
+    - role: external_ip_monitor

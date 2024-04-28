@@ -20,27 +20,27 @@ switches:
       hostname: ts-logan-0 # office
       vtp_mode: client
 
-colo:
+all:
   hosts:
-    raspi-colo:
+    pi5.piccola.us:
+      hostname: pi5
+      ansible_user: joey
+    raspi-colo.tail42371.ts.net:
       hostname: colo
-      # ansible_ssh_port: 5639
+      ansible_user: joey
 
-raspi-home:
+pi_home:
   hosts:
-    10.0.3.108:
-      hostname: raspi-home
+    pi5.piccola.us:
+      tailscale_args: "--hostname=raspi5-home --advertise-routes=10.0.3.0/24 --accept-routes --advertise-exit-node "
+
+pi_colo:
+  hosts:
+    raspi-colo.tail42371.ts.net:
+      tailscale_args: "--hostname=raspi-colo --accept-routes --advertise-exit-node"
+
 
 network:
   children:
     routers:
     switches:
-
-debian:
-  children:
-    puppet:
-
-raspbian:
-  children:
-    colo:
-    raspi-home:

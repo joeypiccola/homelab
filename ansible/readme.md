@@ -4,12 +4,9 @@ All things ansible.
 
 ## current projects being managed here
 
-- Homelab networks (Cisco switchces and Ubiquity router)
-- RasPi environmental monitoring sensors
-- Co-located RasPi for backups
-- Various debian telegraf configs for RasPis and other debian systems
-- Puppet (installed gems and user mgmt)
-- RasPi doorbell
+- home raspi (ups-monitoring, external-ip-monitoring, tailscale node)
+- colo raspi (external-ip-monitoring, file-backup, tailscale node)
+- network routers and switches
 
 ## requirements
 

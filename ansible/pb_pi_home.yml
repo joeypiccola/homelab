@@ -1,0 +1,9 @@
+---
+- hosts: pi_home
+  become: true
+  roles:
+    - role: base
+    - role: tailscale
+    - role: telegraf
+    - role: ups_monitor
+    - role: external_ip_monitor
